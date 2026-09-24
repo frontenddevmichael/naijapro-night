@@ -198,8 +198,6 @@ section { scroll-margin-top: 70px }
 .acard .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.05); transition: transform .6s var(--ease) }
 .acard:hover .ph img { transform: scale(1.06) }
 .abody { padding: clamp(22px, 2.6vw, 32px); display: flex; flex-direction: column; gap: 16px; flex: 1 }
-.vhead { display: flex; align-items: center; gap: 14px }
-.vava { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex: none; border: 2px solid var(--gold); filter: saturate(.9) }
 
 /* ============ ESCROW ============ */
 .esc { background: var(--bg2); border-block: 1px solid var(--line) }
@@ -219,16 +217,18 @@ section { scroll-margin-top: 70px }
 .esc-step p { color: var(--mut); line-height: 1.65; max-width: 30em }
 .esc-step small { display: inline-block; margin-top: 12px; color: var(--gold); font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase }
 
-/* ============ VOICES ============ */
-.vrail { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent) }
-.vtrack { display: flex; gap: 22px; width: max-content; padding: 6px 24px 20px; animation: vdrift 60s linear infinite }
-.vrail:hover .vtrack { animation-play-state: paused }
-@keyframes vdrift { to { transform: translateX(-50%) } }
-.vcard { width: min(80vw, 380px); flex: none; background: var(--bg2); border: 1px solid var(--line); padding: 28px; display: flex; flex-direction: column; gap: 18px }
-.vcard::before { content: "\201C"; font-family: var(--disp); font-size: 3rem; line-height: 1; color: var(--gold) }
-.vcard blockquote { font-family: var(--disp); font-size: 1.25rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.4 }
-.vcard figcaption b { display: block; font-size: .9rem }
-.vcard figcaption span { color: var(--mut); font-size: .82rem }
+/* ============ DRIFT WALL ============ */
+.drift { position: relative; height: clamp(420px, 62vw, 600px); overflow: hidden; perspective: 1200px; perspective-origin: 50% 45%; -webkit-mask-image: radial-gradient(ellipse 80% 86% at 50% 46%, #000 45%, transparent 100%); mask-image: radial-gradient(ellipse 80% 86% at 50% 46%, #000 45%, transparent 100%) }
+.drift-plane { position: absolute; top: 50%; left: 50%; display: flex; gap: 16px; transform-style: preserve-3d; will-change: transform }
+.drift-col { width: 210px; flex: none; transform-style: preserve-3d }
+.drift-track { display: flex; flex-direction: column; gap: 16px; will-change: transform; transform-style: preserve-3d }
+.dw-tile { position: relative; height: 150px; border-radius: 10px; overflow: hidden; background: #0b1411; opacity: .55; transition: opacity .35s; transform-style: preserve-3d }
+.dw-tile img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(.9); user-select: none; -webkit-user-drag: none }
+.dw-tile .shade { position: absolute; inset: 0; background: #04120c; opacity: .38; transition: opacity .35s; pointer-events: none }
+.dw-tile .tag { position: absolute; left: 10px; bottom: 8px; font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; background: rgba(10, 15, 13, .75); color: var(--gold); padding: 5px 10px; pointer-events: none }
+.dw-tile.on { opacity: 1; transform: translateZ(60px); box-shadow: 0 18px 50px -12px rgba(0, 0, 0, .7), 0 0 0 2px var(--gold) }
+.dw-tile.on .shade { opacity: 0 }
+@media(max-width:640px) { .drift-col { width: 150px } .dw-tile { height: 120px } }
 
 /* ============ FAQ ============ */
 .faq details { border-top: 1px solid var(--line) }
@@ -383,10 +383,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
     </div>
 </section>
 
-<!-- ================= MARQUEE ================= -->
-<div class="mq" aria-hidden="true">
-    <div class="mq-track" id="mq1"><span>Lekki</span><i>✦</i><span>Ikoyi</span><i>✦</i><span>Ikeja</span><i>✦</i><span>Yaba</span><i>✦</i><span>Surulere</span><i>✦</i><span>Ajah</span><i>✦</i><span>Maitama</span><i>✦</i><span>Wuse</span><i>✦</i><span>Lekki</span><i>✦</i><span>Ikoyi</span><i>✦</i><span>Ikeja</span><i>✦</i><span>Yaba</span><i>✦</i><span>Surulere</span><i>✦</i><span>Ajah</span><i>✦</i><span>Maitama</span><i>✦</i><span>Wuse</span><i>✦</i></div>
-</div>
+<!-- ================= COVERAGE ================= -->
 <div class="mq mq-rev" aria-hidden="true">
     <div class="mq-track" id="mq2"><span>Lekki · 64</span><i>✦</i><span>Ikeja · 42</span><i>✦</i><span>Wuse · 33</span><i>✦</i><span>Yaba · 35</span><i>✦</i><span>Surulere · 28</span><i>✦</i><span>Ajah · 31</span><i>✦</i><span>Maitama · 26</span><i>✦</i><span>Gwarinpa · 24</span><i>✦</i><span>Lekki · 64</span><i>✦</i><span>Ikeja · 42</span><i>✦</i><span>Wuse · 33</span><i>✦</i><span>Yaba · 35</span><i>✦</i><span>Surulere · 28</span><i>✦</i><span>Ajah · 31</span><i>✦</i><span>Maitama · 26</span><i>✦</i><span>Gwarinpa · 24</span><i>✦</i></div>
 </div>
@@ -421,7 +418,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
 <section class="sec band-a" id="artisans" style="padding-bottom:0">
     <div class="wrap">
         <div class="sec-head">
-            <div><span class="sec-no">02 — Artisans</span><h2 data-split>Rated by the street.</h2></div>
+            <div><span class="sec-no">02 — Artisans</span><h2 data-split>Top rated artisans.</h2></div>
             <p data-reveal>BVN-checked, address-verified, warranty-backed. Drag through the shortlist — every card is a real artisan you can book tonight.</p>
         </div>
     </div>
@@ -458,26 +455,11 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
 <section class="sec band-b" id="voices">
     <div class="wrap">
         <div class="sec-head">
-            <div><span class="sec-no">04 — Word on the street</span><h2 data-split>Neighbours talk.</h2></div>
-            <p data-reveal>Unscripted words from real jobs, rated and receipted.</p>
+            <div><span class="sec-no">04 — Testimonials</span><h2 data-split>Top testimonials.</h2></div>
+            <p data-reveal>Real work, documented on site. Hover to hold a frame.</p>
         </div>
     </div>
-    <div class="vrail">
-        <div class="vtrack">
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-ac.jpg" alt="" loading="lazy"><figcaption><b>Adaeze O.</b><span>Lekki · AC repair</span></figcaption></div><blockquote>“AC fixed same day. I approved the job from my office — the money moved only after.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-linesman.jpg" alt="" loading="lazy"><figcaption><b>Ibrahim S.</b><span>Ikeja · Plumbing</span></figcaption></div><blockquote>“The photo updates sold me. I watched my kitchen get done from my phone.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-somolu.jpg" alt="" loading="lazy"><figcaption><b>Funke A.</b><span>Surulere · Electrical</span></figcaption></div><blockquote>“Third electrician I tried. First one I never had to chase.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-solar.jpg" alt="" loading="lazy"><figcaption><b>Chidi E.</b><span>Wuse · Solar</span></figcaption></div><blockquote>“Inverter in Saturday, warranty card in my WhatsApp Sunday.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-tile.jpg" alt="" loading="lazy"><figcaption><b>Ngozi M.</b><span>Ajah · Tiling</span></figcaption></div><blockquote>“Dispute over tiles — the desk settled it in two days. Fair.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-plumber.jpg" alt="" loading="lazy"><figcaption><b>Segun T.</b><span>Yaba · Carpentry</span></figcaption></div><blockquote>“Quote in eleven minutes. Eleven.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-ac.jpg" alt="" loading="lazy"><figcaption><b>Adaeze O.</b><span>Lekki · AC repair</span></figcaption></div><blockquote>“AC fixed same day. I approved the job from my office — the money moved only after.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-linesman.jpg" alt="" loading="lazy"><figcaption><b>Ibrahim S.</b><span>Ikeja · Plumbing</span></figcaption></div><blockquote>“The photo updates sold me. I watched my kitchen get done from my phone.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-somolu.jpg" alt="" loading="lazy"><figcaption><b>Funke A.</b><span>Surulere · Electrical</span></figcaption></div><blockquote>“Third electrician I tried. First one I never had to chase.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-solar.jpg" alt="" loading="lazy"><figcaption><b>Chidi E.</b><span>Wuse · Solar</span></figcaption></div><blockquote>“Inverter in Saturday, warranty card in my WhatsApp Sunday.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-tile.jpg" alt="" loading="lazy"><figcaption><b>Ngozi M.</b><span>Ajah · Tiling</span></figcaption></div><blockquote>“Dispute over tiles — the desk settled it in two days. Fair.”</blockquote></figure>
-            <figure class="vcard"><div class="vhead"><img class="vava" src="ph-plumber.jpg" alt="" loading="lazy"><figcaption><b>Segun T.</b><span>Yaba · Carpentry</span></figcaption></div><blockquote>“Quote in eleven minutes. Eleven.”</blockquote></figure>
-        </div>
-    </div>
+    <div class="drift" id="drift" role="group" aria-label="Wall of artisan work photography"></div>
 </section>
 
 <!-- ================= FAQ ================= -->
@@ -626,6 +608,96 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
         }, { threshold: 0.5, rootMargin: '0px 0px -10% 0px' });
         targets.forEach(function (el) { io.observe(el); });
     })();
+
+    /* drift wall: vanilla 3D photo columns, no libraries needed */
+    (function () {
+        var box = $('#drift'); if (!box) return;
+        var PHOTOS = [
+            { s: 'ph-linesman.jpg', t: 'Electrical' },
+            { s: 'ph-ac.jpg', t: 'AC & HVAC' },
+            { s: 'ph-plumber.jpg', t: 'Plumbing' },
+            { s: 'ph-solar.jpg', t: 'Solar' },
+            { s: 'ph-tile.jpg', t: 'Tiling' },
+            { s: 'ph-somolu.jpg', t: 'Lagos streets' }
+        ];
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var small = window.innerWidth < 640;
+        var cols = small ? 2 : 3;
+        var unit = small ? 136 : 166;
+        var plane = document.createElement('div'); plane.className = 'drift-plane'; box.appendChild(plane);
+        var tracks = [], heights = [], vels = [], offs = [];
+        function pseudo(i) { return ((((i * 0.6180339887 + 0.35) % 1) + 1) % 1) * 2 - 1; }
+        for (var c = 0; c < cols; c++) {
+            var items = [];
+            for (var k = 0; k < PHOTOS.length; k++) { if (k % cols === c) items.push(PHOTOS[k]); }
+            var colEl = document.createElement('div'); colEl.className = 'drift-col'; colEl.setAttribute('data-col', c);
+            var track = document.createElement('div'); track.className = 'drift-track';
+            var copyH = items.length * unit;
+            var copies = Math.max(2, Math.ceil(((box.clientHeight || 600) * 1.7) / copyH) + 1);
+            var html = '';
+            for (var r = 0; r < copies; r++) {
+                items.forEach(function (it) {
+                    html += '<div class="dw-tile" tabindex="0" role="img" aria-label="' + it.t + '"><img src="' + it.s + '" alt="" loading="lazy" draggable="false"><span class="shade" aria-hidden="true"></span><span class="tag">' + it.t + '</span></div>';
+                });
+            }
+            track.innerHTML = html;
+            colEl.appendChild(track); plane.appendChild(colEl);
+            tracks.push(track); heights.push(copyH); vels.push(0); offs.push(copyH * ((c * 0.37) % 1));
+        }
+        function paint(px, py) {
+            plane.style.transform = 'translate(-50%,-50%) scale(1.18) rotateX(' + (14 + py) + 'deg) rotateY(' + (-12 + px) + 'deg)';
+        }
+        paint(0, 0);
+        if (reduceMotion) return;
+        var hoverCol = -1, running = true, px = 0, py = 0, dpx = 0, dpy = 0, last = null;
+        var base = tracks.map(function (_, c) { return 42 * (1 + 0.45 * pseudo(c)) * (c % 2 === 0 ? 1 : -1); });
+        plane.addEventListener('pointermove', function (e) {
+            var r = box.getBoundingClientRect();
+            px = ((e.clientX - r.left) / r.width - 0.5) * 9;
+            py = -((e.clientY - r.top) / r.height - 0.5) * 9;
+        });
+        plane.addEventListener('pointerleave', function () { px = 0; py = 0; });
+        plane.addEventListener('mouseover', function (e) {
+            var tile = e.target.closest ? e.target.closest('.dw-tile') : null;
+            $$('.dw-tile.on', plane).forEach(function (t) { t.classList.remove('on'); });
+            if (tile) { tile.classList.add('on'); hoverCol = Number(tile.parentNode.parentNode.getAttribute('data-col')); }
+            else hoverCol = -1;
+        });
+        plane.addEventListener('mouseout', function (e) {
+            var tile = e.target.closest ? e.target.closest('.dw-tile') : null;
+            if (tile) tile.classList.remove('on');
+            hoverCol = -1;
+        });
+        plane.addEventListener('focusin', function (e) {
+            var tile = e.target.closest ? e.target.closest('.dw-tile') : null;
+            if (tile) { tile.classList.add('on'); hoverCol = Number(tile.parentNode.parentNode.getAttribute('data-col')); }
+        });
+        plane.addEventListener('focusout', function () {
+            $$('.dw-tile.on', plane).forEach(function (t) { t.classList.remove('on'); });
+            hoverCol = -1;
+        });
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (es) { running = es[0].isIntersecting; }, { threshold: 0 }).observe(box);
+        }
+        function frame(ts) {
+            requestAnimationFrame(frame);
+            if (!running) { last = null; return; }
+            if (last === null) last = ts;
+            var dt = Math.min(0.05, Math.max(0, (ts - last) / 1000)); last = ts;
+            var damp = 1 - Math.exp(-dt / 0.12);
+            dpx += (px - dpx) * damp; dpy += (py - dpy) * damp;
+            paint(dpx, dpy);
+            for (var c = 0; c < tracks.length; c++) {
+                var target = (hoverCol === c) ? 0 : base[c];
+                var ease = 1 - Math.exp(-dt / (target === 0 ? 0.16 : 0.28));
+                vels[c] += (target - vels[c]) * ease;
+                var next = offs[c] + vels[c] * dt, h = heights[c];
+                offs[c] = ((next % h) + h) % h;
+                tracks[c].style.transform = 'translate3d(0,' + (-offs[c]).toFixed(1) + 'px,0)';
+            }
+        }
+        requestAnimationFrame(frame);
+    })();
     function bad(id, on) { $(id).closest('.field').classList.toggle('bad', on); return !on; }
     $('#mformTag').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -694,8 +766,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
             gsap.to(out, { yPercent: 0, duration: 1.1, stagger: 0.06, ease: 'power4.out', scrollTrigger: { trigger: h, start: 'top 86%', once: true } });
         });
 
-        /* marquees: slow constant drift */
-        gsap.fromTo('#mq1', { xPercent: 0 }, { xPercent: -50, duration: 42, repeat: -1, ease: 'none' });
+        /* coverage marquee: slow constant drift */
         gsap.fromTo('#mq2', { xPercent: -50 }, { xPercent: 0, duration: 48, repeat: -1, ease: 'none' });
 
         /* live escrow ticker */
@@ -763,8 +834,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
         gsap.from('.mform', { y: 70, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.mform', start: 'top 88%', once: true } });
         gsap.from('#mwrap .field, #mwrap .submit, #mwrap .fine, #mwrap .m-online', { y: 26, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.mform', start: 'top 80%', once: true } });
         gsap.from('.pts li', { x: -30, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.pts', start: 'top 88%', once: true } });
-        gsap.from('.vcard', { y: 50, opacity: 0, stagger: 0.08, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.vrail', start: 'top 80%', once: true } });
-        gsap.from('.faq details', { y: 30, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 80%', once: true } });
+                gsap.from('.faq details', { y: 30, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 80%', once: true } });
         /* match + footer */
         /* (wordmark letters rise via footer.inview CSS) */
 
