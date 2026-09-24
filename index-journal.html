@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NaijaPro — The hands that keep Lagos running</title>
+<meta name="description" content="Vetted artisans in Lagos and Abuja. You pay only when you approve. Escrow-protected, BVN-verified.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="ph-welder.jpg" fetchpriority="high">
+<style>
+:root {
+    --paper: #F5F1E6;
+    --paper2: #EDE7D6;
+    --ink: #1A1712;
+    --mut: #6E675C;
+    --green: #0E5B3E;
+    --gold: #B7791F;
+    --rule: rgba(26, 23, 18, .22);
+    --serif: 'Fraunces', Georgia, serif;
+    --body: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+    --ease: cubic-bezier(.22, .75, .28, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+html { scroll-behavior: smooth }
+html.lenis, html.lenis body { height: auto }
+.lenis.lenis-smooth { scroll-behavior: auto !important }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); overflow-x: hidden; -webkit-font-smoothing: antialiased }
+::selection { background: var(--green); color: var(--paper) }
+a { color: inherit; text-decoration: none }
+img { display: block; max-width: 100% }
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: 24px }
+@media(min-width:768px) { .wrap { padding-inline: 44px } }
+section { scroll-margin-top: 80px }
+#progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--green); transform: scaleX(0); transform-origin: 0 50%; z-index: 1500 }
+
+/* ============ MASTHEAD ============ */
+.mast { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; border-bottom: 1px solid var(--rule); background: rgba(245, 241, 230, 0); transition: background .4s }
+.mast.scrolled { background: rgba(245, 241, 230, .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px) }
+.mast-in { display: flex; align-items: center; gap: 26px; height: 64px }
+.dateline { font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); white-space: nowrap }
+@media(max-width:760px) { .dateline { display: none } }
+.brand { font-family: var(--serif); font-weight: 700; font-size: 1.4rem; letter-spacing: -.01em; margin-inline: auto }
+@media(min-width:960px) { .brand { margin-inline: 0 } }
+.nav { display: none; align-items: center; gap: 26px; margin-left: auto }
+.nav a { font-size: .86rem; font-weight: 600; color: var(--mut); transition: color .25s }
+.nav a:hover { color: var(--ink) }
+@media(min-width:960px) { .nav { display: flex } }
+.btn-cta { display: none; background: var(--ink); color: var(--paper); font-weight: 700; font-size: .85rem; padding: 12px 24px; border-radius: 999px; transition: transform .3s var(--ease), background .25s }
+.btn-cta:hover { transform: translateY(-2px); background: var(--green) }
+@media(min-width:960px) { .btn-cta { display: inline-block } }
+.burger { display: grid; place-items: center; width: 42px; height: 42px; background: none; border: 0; cursor: pointer; margin-left: auto }
+.burger span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 2.5px 0 }
+@media(min-width:960px) { .burger { display: none } }
+.menu { position: fixed; inset: 0; z-index: 990; background: var(--paper); display: flex; flex-direction: column; justify-content: center; padding: 0 32px; opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s }
+.menu.open { opacity: 1; visibility: visible }
+.menu a { font-family: var(--serif); font-size: clamp(2rem, 9vw, 3.2rem); padding: 10px 0; border-bottom: 1px solid var(--rule) }
+
+/* ============ COVER ============ */
+.cover { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; background: var(--ink) }
+.cover img { position: absolute; inset: -6% 0; width: 100%; height: 112%; object-fit: cover; object-position: center 30%; filter: grayscale(.55) contrast(1.06) brightness(.92) }
+.cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,23,18,.42), rgba(26,23,18,.05) 42%, rgba(26,23,18,.72) 100%) }
+.cover-in { position: relative; z-index: 2; color: #F5F1E6; padding-bottom: 56px; width: 100% }
+.kicker { display: flex; align-items: center; gap: 14px; font-size: .78rem; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #E8C97A; margin-bottom: 24px }
+.kicker::before { content: ""; width: 44px; height: 1px; background: #E8C97A }
+.cover h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.9rem, 8.5vw, 7rem); line-height: 1.02; letter-spacing: -.02em; max-width: 14ch }
+.cover h1 .line { display: block; overflow: hidden }
+.cover h1 .line > span { display: block }
+.cover h1 em { font-style: italic; color: #E8C97A }
+.standfirst { margin-top: 22px; max-width: 36em; color: rgba(245, 241, 230, .82); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.65 }
+.cover-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px }
+.btn-paper { display: inline-flex; align-items: center; gap: 10px; background: #F5F1E6; color: var(--ink); font-weight: 700; padding: 17px 36px; border-radius: 999px; transition: transform .3s var(--ease) }
+.btn-paper:hover { transform: translateY(-3px) }
+.btn-line { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(245, 241, 230, .5); color: #F5F1E6; font-weight: 700; padding: 17px 36px; border-radius: 999px; transition: border-color .25s, transform .3s var(--ease) }
+.btn-line:hover { border-color: #F5F1E6; transform: translateY(-3px) }
+.cover-meta { display: flex; flex-wrap: wrap; gap: 12px 36px; margin-top: 44px; padding-top: 20px; border-top: 1px solid rgba(245, 241, 230, .3); font-size: .82rem; color: rgba(245, 241, 230, .75) }
+
+/* ============ FIGURES ============ */
+.fig { margin: 0 }
+.fig .ph { overflow: hidden; background: var(--green) }
+.fig img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.5) contrast(1.07) brightness(.95) }
+.fig figcaption { display: flex; justify-content: space-between; gap: 16px; padding-top: 12px; font-size: .8rem; color: var(--mut) }
+.fig figcaption b { color: var(--ink); font-weight: 700 }
+.fullbleed { width: 100%; margin-block: clamp(60px, 8vw, 120px) }
+.fullbleed .ph { height: clamp(320px, 62vw, 620px) }
+.fullbleed figcaption { max-width: 1180px; margin-inline: auto; padding-inline: 24px }
+@media(min-width:768px) { .fullbleed figcaption { padding-inline: 44px } }
+
+/* ============ LEDE ============ */
+.lede { padding-block: clamp(70px, 9vw, 130px) }
+.lede-grid { display: grid; gap: 40px }
+@media(min-width:960px) { .lede-grid { grid-template-columns: 1fr 1.6fr; gap: 70px } }
+.sec-kick { font-size: .76rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: block }
+.lede h2, .sec-title { font-family: var(--serif); font-weight: 500; font-size: clamp(2rem, 4.6vw, 3.6rem); letter-spacing: -.02em; line-height: 1.08 }
+.lede h2 .line, .sec-title .line { display: block; overflow: hidden }
+.lede h2 .line > span, .sec-title .line > span { display: block }
+.lede-copy p { font-size: 1.06rem; line-height: 1.75; color: #3d3830; margin-bottom: 1.2em }
+.lede-copy p:first-child::first-letter { font-family: var(--serif); font-weight: 700; font-size: 3.4em; float: left; line-height: .85; padding-right: 10px; color: var(--green) }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); margin-top: clamp(50px, 7vw, 90px) }
+.fact { padding: 26px 10px 26px 0 }
+.fact + .fact { border-left: 1px solid var(--rule); padding-left: 26px }
+.fact b { display: block; font-family: var(--serif); font-weight: 600; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -.02em }
+.fact span { font-size: .82rem; color: var(--mut) }
+@media(max-width:640px) { .facts { grid-template-columns: 1fr 1fr } .fact:nth-child(3) { border-left: 0 } }
+
+/* ============ TRADES TABLE ============ */
+.trades { padding-block: clamp(60px, 8vw, 110px) }
+.trow { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 8px 24px; padding: 26px 4px; border-top: 1px solid var(--rule); transition: padding .3s var(--ease) }
+.trow:last-child { border-bottom: 1px solid var(--rule) }
+.trow:hover { padding-left: 14px }
+.trow h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem, 3.6vw, 2.4rem); letter-spacing: -.015em }
+.trow h3 a { background-image: linear-gradient(var(--green), var(--green)); background-size: 0% 2px; background-repeat: no-repeat; background-position: 0 96%; transition: background-size .4s var(--ease) }
+.trow:hover h3 a { background-size: 100% 2px }
+.trow p { grid-column: 1; color: var(--mut); font-size: .92rem }
+.trow .n { grid-column: 2; grid-row: 1; font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 1.05rem; white-space: nowrap }
+@media(min-width:760px) { .trow { grid-template-columns: 70px 1fr auto } .trow .idx { grid-column: 1 } .trow h3, .trow p { grid-column: 2 } .trow .n { grid-column: 3; grid-row: auto } }
+.trow .idx { display: none; font-size: .8rem; font-weight: 700; letter-spacing: .2em; color: var(--mut) }
+@media(min-width:760px) { .trow .idx { display: block } }
+
+/* ============ PORTRAITS ============ */
+.portraits { display: grid; gap: clamp(50px, 7vw, 90px); padding-block: clamp(60px, 8vw, 110px) }
+.port { display: grid; gap: 26px; align-items: end }
+@media(min-width:900px) { .port { grid-template-columns: 1fr 1fr; gap: 60px } .port.flip > .ph { order: 2 } }
+.port .ph { aspect-ratio: 4/5; max-height: 640px }
+.port blockquote { font-family: var(--serif); font-size: clamp(1.4rem, 2.8vw, 2rem); line-height: 1.35; letter-spacing: -.01em; margin: 18px 0 }
+.port blockquote::before { content: "\201C" }
+.port blockquote::after { content: "\201D" }
+.byline { font-size: .85rem; color: var(--mut) }
+.byline b { color: var(--ink) }
+.chip-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px }
+.chip-row span { font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--rule); padding: 8px 14px; border-radius: 999px; color: var(--green) }
+
+/* ============ DUO ============ */
+.duo { display: grid; gap: 22px; padding-block: clamp(40px, 6vw, 80px) }
+@media(min-width:760px) { .duo { grid-template-columns: 1.2fr .8fr } }
+.duo .ph { height: 100%; min-height: 300px }
+
+/* ============ ESCROW ============ */
+.esc { background: var(--ink); color: #F5F1E6; padding-block: clamp(80px, 10vw, 140px) }
+.esc .sec-kick { color: #E8C97A }
+.esc h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -.02em; line-height: 1.05; max-width: 16ch }
+.esc h2 .line { display: block; overflow: hidden }
+.esc h2 .line > span { display: block }
+.steps { display: grid; gap: 0; margin-top: 54px; border-top: 1px solid rgba(245, 241, 230, .2) }
+.step { display: grid; gap: 8px 30px; padding: 34px 4px; border-bottom: 1px solid rgba(245, 241, 230, .2) }
+@media(min-width:900px) { .step { grid-template-columns: 90px 1fr 1fr; align-items: baseline } }
+.step .no { font-family: var(--serif); font-style: italic; font-size: 1.4rem; color: #E8C97A }
+.step h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600 }
+.step p { color: rgba(245, 241, 230, .7); line-height: 1.65; max-width: 32em }
+
+/* ============ MATCH ============ */
+.match-grid { display: grid; gap: 56px; padding-block: clamp(70px, 9vw, 130px) }
+@media(min-width:960px) { .match-grid { grid-template-columns: 1fr 1fr; gap: 70px; align-items: start } }
+.field { margin-bottom: 26px }
+.field label { display: block; font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--mut); margin-bottom: 6px }
+.field input, .field select { width: 100%; background: transparent; border: 0; border-bottom: 2px solid var(--ink); color: var(--ink); font: 600 1.1rem var(--body); padding: 12px 2px; outline: none; border-radius: 0; appearance: none; transition: border-color .25s }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4 7l6 6 6-6' fill='none' stroke='%230E5B3E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right center; background-size: 15px; cursor: pointer }
+.field select option { background: var(--paper) }
+.field input:focus, .field select:focus { border-color: var(--green) }
+.err { display: none; color: #a33b2a; font-size: .82rem; margin-top: 8px }
+.field.bad input { border-color: #a33b2a }
+.field.bad .err { display: block }
+.btn-ink { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: var(--ink); color: var(--paper); font-weight: 700; font-size: 1rem; padding: 19px; border: 0; border-radius: 999px; cursor: pointer; transition: transform .3s var(--ease), background .25s }
+.btn-ink:hover { transform: translateY(-2px); background: var(--green); color: #0A0F0D }
+.fine { margin-top: 14px; color: var(--mut); font-size: .82rem }
+.mdone { border: 2px solid var(--ink); padding: 44px 30px; text-align: center }
+.mdone svg { width: 72px; height: 72px; margin: 0 auto 18px; color: var(--green) }
+.mdone svg circle, .mdone svg path { stroke-dasharray: 1; stroke-dashoffset: 1 }
+.mdone h3 { font-family: var(--serif); font-size: 1.8rem; margin-bottom: 10px }
+.mdone p { color: var(--mut); margin-bottom: 24px }
+
+/* ============ COLOPHON ============ */
+footer { border-top: 2px solid var(--ink); padding: clamp(60px, 8vw, 110px) 0 30px }
+.colophon { display: grid; gap: 44px }
+@media(min-width:900px) { .colophon { grid-template-columns: 1.2fr 1fr 1fr } }
+.colophon h4 { font-size: .76rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px }
+.colophon a, .colophon span { display: block; padding: 5px 0; color: #3d3830; font-size: .93rem }
+.colophon a:hover { color: var(--green) }
+.credits { font-size: .78rem; color: var(--mut); line-height: 1.8; margin-top: 8px }
+.credits a { display: inline; padding: 0; text-decoration: underline }
+.f-word { font-family: var(--serif); font-weight: 600; font-size: clamp(3.4rem, 15vw, 13rem); letter-spacing: -.03em; line-height: 1; text-align: center; margin-top: clamp(50px, 8vw, 100px); color: var(--ink) }
+.f-word em { font-style: italic; color: var(--green) }
+.f-bot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--rule); font-size: .8rem; color: var(--mut) }
+.f-bot a:hover { color: var(--ink) }
+
+@media(prefers-reduced-motion:reduce) {
+    html { scroll-behavior: auto }
+    *, *::before, *::after { animation: none !important; transition-duration: .01ms !important }
+}
+</style>
+</head>
+<body id="top">
+<div id="progress" aria-hidden="true"></div>
+
+<header class="mast" id="mast">
+    <div class="wrap mast-in">
+        <span class="dateline">Lagos · Abuja — Est. 2026</span>
+        <a class="brand" href="#top">NaijaPro</a>
+        <nav class="nav" aria-label="Primary">
+            <a href="#trades">Trades</a>
+            <a href="#artisans">Artisans</a>
+            <a href="#escrow">Escrow</a>
+            <a href="#journal">Journal</a>
+        </nav>
+        <a class="btn-cta" href="#match">Post a job</a>
+        <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+    </div>
+</header>
+<div class="menu" id="menu">
+    <a href="#trades">Trades</a>
+    <a href="#artisans">Artisans</a>
+    <a href="#escrow">Escrow</a>
+    <a href="#journal">Journal</a>
+    <a href="#match">Post a job</a>
+</div>
+
+<main>
+<!-- COVER -->
+<section class="cover" id="cover">
+    <img class="cover-photo" src="ph-welder.jpg" alt="Welder at work in Enugu Coal Camp, Nigeria" fetchpriority="high">
+    <div class="wrap cover-in">
+        <p class="kicker">Issue Nº 04 — The Artisans</p>
+        <h1 id="cover-h1"><span class="line"><span>The hands that</span></span><span class="line"><span>keep <em>Lagos</em> running.</span></span></h1>
+        <p class="standfirst">Vetted artisans in Lagos &amp; Abuja. You pay only when you approve — every naira held in escrow until the work earns it.</p>
+        <div class="cover-cta">
+            <a class="btn-paper" href="#match">Post a job</a>
+            <a class="btn-line" href="#artisans">Meet the artisans</a>
+        </div>
+        <div class="cover-meta"><span>Photograph: Coal Camp, Enugu — Tech.Felix</span><span>★★★★★ 4.9 average rating</span><span>Scroll to read on</span></div>
+    </div>
+</section>
+
+<!-- LEDE -->
+<section class="lede" id="journal">
+    <div class="wrap">
+        <div class="lede-grid">
+            <div><span class="sec-kick">The lede</span><h2 data-split>Trust, documented.</h2></div>
+            <div class="lede-copy" data-reveal>
+                <p>Every year, millions of repair jobs change hands in Lagos and Abuja on nothing more than a handshake and hope. NaijaPro was built for the opposite: verified identities, locked payments, photographed proof — craftsmanship with a paper trail.</p>
+                <p>This is the record of how it works: the trades, the artisans, the escrow ledger, and the streets they serve. Reported, not promised.</p>
+            </div>
+        </div>
+        <div class="facts">
+            <div class="fact" data-reveal><b>₦<span class="count" data-to="48.6" data-dec="1">48.6</span>M</b><span>held in escrow today</span></div>
+            <div class="fact" data-reveal><b><span class="count" data-to="429" data-dec="0">429</span></b><span>jobs in progress</span></div>
+            <div class="fact" data-reveal><b><span class="count" data-to="15" data-dec="0">15</span> min</b><span>median first quote</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- STREET ESSAY -->
+<figure class="fig fullbleed">
+    <div class="ph"><img data-plx src="ph-somolu.jpg" alt="Morning on a Somolu street market, Lagos" loading="lazy"></div>
+    <figcaption class="wrap"><span><b>Fig. 01 —</b> Somolu, Lagos. The city these artisans cross every day.</span><span>Wikimedia Commons</span></figcaption>
+</figure>
+
+<!-- TRADES -->
+<section class="trades" id="trades">
+    <div class="wrap">
+        <span class="sec-kick">Index — Six trades</span>
+        <h2 class="sec-title" data-split>Every trade, one address.</h2>
+        <div id="tr-list" style="margin-top:40px">
+            <div class="trow" data-reveal><span class="idx">01</span><h3><a href="#artisans">AC &amp; repair</a></h3><p>Split units, gas refills, full servicing.</p><span class="n">118 artisans</span></div>
+            <div class="trow" data-reveal><span class="idx">02</span><h3><a href="#artisans">Solar &amp; inverter</a></h3><p>Installations, diagnostics, battery banks.</p><span class="n">94 artisans</span></div>
+            <div class="trow" data-reveal><span class="idx">03</span><h3><a href="#artisans">Plumbing</a></h3><p>Pumps, boreholes, bathrooms, kitchens.</p><span class="n">146 artisans</span></div>
+            <div class="trow" data-reveal><span class="idx">04</span><h3><a href="#artisans">Electrical</a></h3><p>Wiring, panels, faults, rewires.</p><span class="n">204 artisans</span></div>
+            <div class="trow" data-reveal><span class="idx">05</span><h3><a href="#artisans">Carpentry</a></h3><p>Cabinets, doors, wardrobes, roofs.</p><span class="n">132 artisans</span></div>
+            <div class="trow" data-reveal><span class="idx">06</span><h3><a href="#artisans">Tiling &amp; POP</a></h3><p>Floors, walls, ceilings, finishes.</p><span class="n">79 artisans</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- PORTRAITS -->
+<section id="artisans">
+    <div class="wrap portraits">
+        <div>
+            <span class="sec-kick">Portraits</span>
+            <h2 class="sec-title" data-split>Rated by the street.</h2>
+        </div>
+        <article class="port">
+            <figure class="fig"><div class="ph"><img data-plx src="ph-saw.jpg" alt="Carpenter cutting timber on a circular saw, Nigeria" loading="lazy"></div><figcaption><span><b>Fig. 02 —</b> Timber, measured twice.</span><span>Akpeski / Commons</span></figcaption></figure>
+            <div data-reveal>
+                <span class="sec-kick">The carpenter</span>
+                <blockquote>Measure twice, cut once — and photograph everything in between.</blockquote>
+                <p class="byline"><b>Emeka O.</b> — AC &amp; HVAC, Lekki · 4.9 from 212 jobs · from ₦15,000</p>
+                <div class="chip-row"><span>BVN verified</span><span>7-day warranty</span><span>12 min away</span></div>
+            </div>
+        </article>
+        <article class="port flip">
+            <figure class="fig"><div class="ph"><img data-plx src="ph-electricians.jpg" alt="Electricians at work, Nigeria" loading="lazy"></div><figcaption><span><b>Fig. 03 —</b> Current affairs.</span><span>Commons</span></figcaption></figure>
+            <div data-reveal>
+                <span class="sec-kick">The electricians</span>
+                <blockquote>No chase, no stories. The quote was the price.</blockquote>
+                <p class="byline"><b>Babatunde A.</b> — Electrical, Ikeja · 4.8 from 187 jobs · from ₦12,500</p>
+                <div class="chip-row"><span>BVN verified</span><span>7-day warranty</span><span>18 min away</span></div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- WORK DUO -->
+<div class="wrap duo">
+    <figure class="fig" data-reveal><div class="ph"><img data-plx src="ph-linesman.jpg" alt="Electricity worker on the lines, Nigeria" loading="lazy"></div><figcaption><span><b>Fig. 04 —</b> Above the streets.</span><span>Commons</span></figcaption></figure>
+    <figure class="fig" data-reveal><div class="ph"><img data-plx src="ph-welder.jpg" alt="Welder portrait, Coal Camp Enugu" loading="lazy"></div><figcaption><span><b>Fig. 05 —</b> The welder, Coal Camp.</span><span>Tech.Felix / Commons</span></figcaption></figure>
+</div>
+
+<!-- ESCROW -->
+<section class="esc" id="escrow">
+    <div class="wrap">
+        <span class="sec-kick">The ledger</span>
+        <h2 data-split>Money moves when you say so.</h2>
+        <div class="steps">
+            <div class="step" data-reveal><span class="no">i.</span><div><h3>Fund it</h3><p>Lock the agreed quote with a licensed custodian. The artisan gets the go-ahead — not the money.</p></div></div>
+            <div class="step" data-reveal><span class="no">ii.</span><div><h3>Watch it</h3><p>Timestamped photos and material receipts arrive as the work happens. The record writes itself.</p></div></div>
+            <div class="step" data-reveal><span class="no">iii.</span><div><h3>Approve it</h3><p>Happy? One tap releases the funds. Not happy? The dispute desk freezes them first.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- MATCH -->
+<section id="match">
+    <div class="wrap match-grid">
+        <div>
+            <span class="sec-kick">Classifieds</span>
+            <h2 class="sec-title" data-split>Quotes in 15 minutes.</h2>
+            <div class="lede-copy" data-reveal style="margin-top:20px">
+                <p>Describe the job below. Vetted artisans nearby answer with fixed quotes — free to post, free to compare, nothing moves until you approve.</p>
+            </div>
+        </div>
+        <div data-reveal>
+            <form id="mformTag" novalidate>
+                <div class="field"><label for="mj">What needs doing?</label><input id="mj" name="job" type="text" placeholder="e.g. 1.5HP AC leaking water" required minlength="4" autocomplete="off"><p class="err">Tell us what needs doing (a few words is enough).</p></div>
+                <div class="field"><label for="ma">Area</label><input id="ma" name="area" type="text" placeholder="e.g. Lekki Phase 1" required autocomplete="address-level2"><p class="err">Add your area.</p></div>
+                <div class="field"><label for="mt">Preferred time</label><select id="mt" name="time"><option>Within 2 hours</option><option selected>Today</option><option>This weekend</option></select></div>
+                <div class="field"><label for="mp">WhatsApp number</label><input id="mp" name="phone" type="tel" inputmode="tel" placeholder="0803 000 0000" required autocomplete="tel-national"><p class="err">Enter a valid Nigerian mobile number.</p></div>
+                <button class="btn-ink" type="submit"><span>Send request</span></button>
+                <p class="fine">No payment yet. You review artisans before funding any escrow.</p>
+            </form>
+            <div class="mdone" id="mdone" hidden>
+                <svg viewBox="0 0 92 92" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><circle cx="46" cy="46" r="40" pathLength="1"/><path d="M28 47l13 13 24-27" pathLength="1"/></svg>
+                <h3>Filed.</h3>
+                <p>Watch your WhatsApp. Vetted artisans nearby will send fixed quotes shortly.</p>
+                <button class="btn-ink" type="button" id="magain">Post another job</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- COLOPHON -->
+<footer>
+    <div class="wrap colophon">
+        <div>
+            <h4>NaijaPro — The Journal</h4>
+            <span>Vetted artisans, Lagos &amp; Abuja.</span>
+            <span>Escrow-protected. BVN-verified.</span>
+        </div>
+        <div>
+            <h4>Sections</h4>
+            <a href="#trades">Trades index</a>
+            <a href="#artisans">Portraits</a>
+            <a href="#escrow">The ledger</a>
+            <a href="#match">Classifieds</a>
+        </div>
+        <div>
+            <h4>Photographs</h4>
+            <p class="credits">Wikimedia Commons, CC BY-SA 4.0 — “Coal Camp Artisan” by Tech.Felix; saw &amp; electrical works by Commons contributors. Theatre &amp; bridge: NaijaPro.</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="f-word">Naija<em>Pro</em></div>
+        <div class="f-bot">
+            <p>© 2026 NaijaPro Technologies Ltd. — Set in Fraunces &amp; Figtree.</p>
+            <a href="#top">Back to top ↑</a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function () {
+    'use strict';
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var motion = !!(window.gsap && window.ScrollTrigger) && !reduce;
+    function $(s, c) { return (c || document).querySelector(s); }
+    function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+    var mast = $('#mast');
+    function onScroll() {
+        var y = window.scrollY || window.pageYOffset;
+        mast.classList.toggle('scrolled', y > 40);
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        $('#progress').style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    onScroll();
+
+    var burger = $('#burger'), menu = $('#menu');
+    burger.addEventListener('click', function () {
+        var open = !menu.classList.contains('open');
+        menu.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
+    $$('#menu a').forEach(function (a) { a.addEventListener('click', function () { menu.classList.remove('open'); document.body.style.overflow = ''; }); });
+
+    function bad(id, on) { $(id).closest('.field').classList.toggle('bad', on); return !on; }
+    $('#mformTag').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var okJ = bad('#mj', $('#mj').value.trim().length < 4);
+        var okA = bad('#ma', $('#ma').value.trim().length < 2);
+        var digits = $('#mp').value.replace(/\D/g, '').replace(/^234/, '0');
+        var okP = bad('#mp', !/^0[789][01]\d{8}$/.test(digits));
+        if (!(okJ && okA && okP)) return;
+        $('#mformTag').style.display = 'none';
+        var done = $('#mdone'); done.hidden = false;
+        if (motion) {
+            gsap.from(done, { y: 26, opacity: 0, duration: 0.8, ease: 'power2.out' });
+            gsap.to('#mdone svg circle, #mdone svg path', { strokeDashoffset: 0, duration: 1, stagger: 0.3, ease: 'power2.out' });
+        } else {
+            $$('#mdone svg circle, #mdone svg path').forEach(function (p) { p.style.strokeDashoffset = 0; });
+        }
+    });
+    $('#magain').addEventListener('click', function () { $('#mdone').hidden = true; var f = $('#mformTag'); f.style.display = ''; f.reset(); });
+
+    if (!motion) return;
+    var gsap = window.gsap, ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
+    if (window.Lenis) {
+        var lenis = new window.Lenis({ duration: 1.1, easing: function (t) { return 1 - Math.pow(1 - t, 3); } });
+        lenis.on('scroll', ST.update);
+        gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+        gsap.ticker.lagSmoothing(0);
+    }
+
+    /* cover intro */
+    var words = $$('#cover-h1 .line > span');
+    gsap.set('.cover-photo', { scale: 1.12 });
+    gsap.set(words, { yPercent: 115 });
+    gsap.set(['.kicker', '.standfirst', '.cover-cta', '.cover-meta'], { y: 24, opacity: 0 });
+    var intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    intro
+        .to('.cover-photo', { scale: 1, duration: 2, ease: 'power2.out' }, 0)
+        .to(words, { yPercent: 0, duration: 1.1, stagger: 0.12 }, 0.15)
+        .to(['.kicker', '.standfirst', '.cover-cta', '.cover-meta'], { y: 0, opacity: 1, duration: 0.9, stagger: 0.1 }, 0.55);
+
+    /* photo parallax + slow settle */
+    $$('[data-plx]').forEach(function (img) {
+        gsap.fromTo(img, { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: img.closest('figure') || img, start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
+    });
+    gsap.to('.cover-photo', { yPercent: 14, ease: 'none', scrollTrigger: { trigger: '#cover', start: 'top top', end: 'bottom top', scrub: 0.6 } });
+
+    /* gentle reveals */
+    $$('[data-reveal]').forEach(function (el) {
+        gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+
+    /* split headings */
+    $$('[data-split]').forEach(function (h) {
+        var lines = $$('.line', h);
+        if (!lines.length) {
+            var w = h.textContent.trim().split(/\s+/); h.textContent = '';
+            w.forEach(function (word, i) {
+                var o = document.createElement('span'); o.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:top';
+                var n = document.createElement('span'); n.style.display = 'inline-block'; n.textContent = word;
+                o.appendChild(n); h.appendChild(o);
+                if (i < w.length - 1) h.appendChild(document.createTextNode(' '));
+            });
+            lines = $$('.line', h);
+        }
+        var out = [];
+        lines.forEach(function (ln) {
+            var words2 = ln.textContent.trim().split(/\s+/); ln.textContent = '';
+            words2.forEach(function (word, i) {
+                var o = document.createElement('span'); o.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:top';
+                var n = document.createElement('span'); n.style.display = 'inline-block'; n.textContent = word;
+                o.appendChild(n); ln.appendChild(o);
+                if (i < words2.length - 1) ln.appendChild(document.createTextNode(' '));
+                out.push(n);
+            });
+        });
+        gsap.set(out, { yPercent: 115 });
+        gsap.to(out, { yPercent: 0, duration: 1, stagger: 0.05, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 86%', once: true } });
+    });
+
+    /* counters */
+    $$('.count').forEach(function (el) {
+        var to = parseFloat(el.getAttribute('data-to')), dec = parseInt(el.getAttribute('data-dec'), 10) || 0, obj = { v: 0 };
+        if (!to) return;
+        ST.create({
+            trigger: el, start: 'top 92%', once: true, onEnter: function () {
+                gsap.to(obj, { v: to, duration: 2, ease: 'power2.out', onUpdate: function () { el.textContent = obj.v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }); } });
+            }
+        });
+    });
+
+    /* figure clip reveals */
+    $$('.fig .ph').forEach(function (ph) {
+        gsap.fromTo(ph, { clipPath: 'inset(8% 6% 8% 6%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: ph, start: 'top 92%', end: 'top 45%', scrub: 0.6 } });
+    });
+
+    /* footer wordmark */
+    gsap.from('.f-word', { yPercent: 18, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.f-word', start: 'top 94%', once: true } });
+
+    window.addEventListener('load', function () { ST.refresh(); });
+})();
+</script>
+</body>
+</html>
