@@ -266,7 +266,8 @@ section { scroll-margin-top: 70px }
 .perk p { margin-top: 0; font-size: .95rem }
 
 /* ============ COVERAGE MAP ============ */
-.map-board { border: 1px solid var(--line); background: var(--bg2) }
+.map-board { border: 1px solid var(--line); background: var(--bg2); overflow: hidden }
+.map-fallback { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 30px; color: var(--mut); font-size: .95rem; line-height: 1.6 }
 .map-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 16px 22px; border-bottom: 1px solid var(--line); font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em }
 .map-online { display: inline-flex; align-items: center; gap: 8px; color: var(--mut) }
 .map-online i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); animation: blink 1.8s infinite }
@@ -324,7 +325,34 @@ section { scroll-margin-top: 70px }
 .mdone h3 { margin-bottom: 12px }
 .mdone p { color: var(--mut); line-height: 1.65; margin-bottom: 26px }
 
-/* ============ SCROLL-CASCADE (no-library fallback-proof) ============ */
+/* ============ IO CASCADES (dead-zone proof) ============ */
+html.js .map-board, html.js .mform, html.js .proof { opacity: 0; transform: translateY(60px); transition: opacity .9s ease, transform 1s var(--ease) }
+html.js .inview.map-board, html.js .inview.mform, html.js .inview.proof { opacity: 1; transform: none }
+html.js .pts li { opacity: 0; transform: translateX(-26px); transition: opacity .7s ease, transform .8s var(--ease) }
+html.js .pts.inview li { opacity: 1; transform: none }
+html.js .pts.inview li:nth-child(2) { transition-delay: .12s }
+html.js .pts.inview li:nth-child(3) { transition-delay: .24s }
+html.js .faq details { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .8s var(--ease) }
+html.js .faq.inview details { opacity: 1; transform: none }
+html.js .faq.inview details:nth-child(2) { transition-delay: .1s }
+html.js .faq.inview details:nth-child(3) { transition-delay: .2s }
+html.js .faq.inview details:nth-child(4) { transition-delay: .3s }
+html.js .faq.inview details:nth-child(5) { transition-delay: .4s }
+html.js .acard { opacity: 0; transform: translateY(60px); transition: opacity .9s ease, transform 1s var(--ease), border-color .3s, box-shadow .35s }
+html.js #rail.inview .acard { opacity: 1; transform: none }
+html.js #rail.inview .acard:nth-child(2) { transition-delay: .12s }
+html.js #rail.inview .acard:nth-child(3) { transition-delay: .24s }
+html.js #rail.inview .acard:nth-child(4) { transition-delay: .36s }
+html.js #rail.inview .acard:nth-child(5) { transition-delay: .48s }
+html.js #rail.inview .acard:hover { transform: translateY(-6px) }
+html.js #tr-list.inview .tcell:hover { transform: translateY(-5px) }
+html.js .tcell { opacity: 0; transform: translateY(50px); transition: opacity .8s ease, transform .9s var(--ease), border-color .3s, box-shadow .35s }
+html.js #tr-list.inview .tcell { opacity: 1; transform: none }
+html.js #tr-list.inview .tcell:nth-child(2) { transition-delay: .09s }
+html.js #tr-list.inview .tcell:nth-child(3) { transition-delay: .18s }
+html.js #tr-list.inview .tcell:nth-child(4) { transition-delay: .27s }
+html.js #tr-list.inview .tcell:nth-child(5) { transition-delay: .36s }
+html.js #tr-list.inview .tcell:nth-child(6) { transition-delay: .45s }
 html.js #perks .perk { opacity: 0; transform: translateY(70px); transition: opacity .9s ease, transform 1s var(--ease) }
 html.js #perks.inview .perk { opacity: 1; transform: none }
 html.js #perks.inview .perk:nth-child(2) { transition-delay: .16s }
@@ -415,7 +443,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
     </div>
 </section>
 
-<!-- ================= COVERAGE ================= -->
+<!-- ================= COVERAGE MARQUEE ================= -->
 <div class="mq mq-rev" aria-hidden="true">
     <div class="mq-track" id="mq2"><span>Lekki · 64</span><i>✦</i><span>Ikeja · 42</span><i>✦</i><span>Wuse · 33</span><i>✦</i><span>Yaba · 35</span><i>✦</i><span>Surulere · 28</span><i>✦</i><span>Ajah · 31</span><i>✦</i><span>Maitama · 26</span><i>✦</i><span>Gwarinpa · 24</span><i>✦</i><span>Lekki · 64</span><i>✦</i><span>Ikeja · 42</span><i>✦</i><span>Wuse · 33</span><i>✦</i><span>Yaba · 35</span><i>✦</i><span>Surulere · 28</span><i>✦</i><span>Ajah · 31</span><i>✦</i><span>Maitama · 26</span><i>✦</i><span>Gwarinpa · 24</span><i>✦</i></div>
 </div>
@@ -652,7 +680,12 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
     /* join + footer cascades: vanilla observer, runs with or without GSAP */
     (function () {
         var targets = [];
-        ['#perks', '.f-cta-row', '.f-cols2', '#f-word'].forEach(function (s) { var el = $(s); if (el) targets.push(el); });
+        ['#perks', '.f-cta-row', '.f-cols2', '#f-word', '.map-board', '.mform', '.pts', '.proof', '.faq', '#rail', '#tr-list'].forEach(function (s) { var el = $(s); if (el) targets.push(el); });
+        if (!targets.length) return;
+        if (!('IntersectionObserver' in window)) { targets.forEach(function (el) { el.classList.add('inview'); }); return; }
+        var io = new IntersectionObserver(function (es) {
+            es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('inview'); io.unobserve(e.target); } });
+        }, { threshold: 0.35, rootMargin: '0px 0px -10% 0px' });
         if (!targets.length) return;
         if (!('IntersectionObserver' in window)) { targets.forEach(function (el) { el.classList.add('inview'); }); return; }
         var io = new IntersectionObserver(function (es) {
@@ -847,13 +880,13 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
         gsap.from('.stat', { y: 44, opacity: 0, stagger: 0.12, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.stats', start: 'top 88%', once: true } });
 
         /* trades rows */
-        gsap.from('.tcell', { y: 50, opacity: 0, stagger: 0.09, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '#tr-list', start: 'top 85%', once: true } });
+                /* trades entrances handled by IO cascades above */
 
         /* join perks cascade */
         /* artisans horizontal */
 
         /* artisans horizontal */
-        gsap.from('.acard', { y: 70, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '#rail', start: 'top 85%', once: true } });
+                /* card entrances handled by IO cascades above */
 
                 /* live coverage map */
                 var cityMap = null, lagosLayer = null, abujaLayer = null;
@@ -884,6 +917,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
                         { ll: [8.991, 7.378], n: 12, t: 'Lugbe', f: '9,000', dim: 1 }
                     ]);
                 }
+                if ((!window.L || !cityMap) && $('#map-el')) { var fb = document.createElement('div'); fb.className = 'map-fallback'; fb.textContent = 'Live map is offline right now — 312 artisans are online across Lagos and Abuja.'; $('#map-el').appendChild(fb); }
                 $$('.map-tab').forEach(function (b) {
                     b.addEventListener('click', function () {
                         $$('.map-tab').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
@@ -894,7 +928,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
                         else { cityMap.removeLayer(lagosLayer); abujaLayer.addTo(cityMap); cityMap.flyTo([9.06, 7.47], 12, { duration: 1.2 }); }
                     });
                 });
-                gsap.from('.map-board', { y: 70, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.map-board', start: 'top 88%', once: true } });
+                /* entrances now handled by IO cascades above */
 
         /* escrow timeline */
         gsap.from('.esc-step', { x: 20, opacity: 0, stagger: 0.06, duration: 0.4, ease: 'power2.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: '#escSteps', start: 'top 78%', once: true } });
@@ -912,10 +946,8 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
         })();
 
         /* match + footer */
-        gsap.from('.mform', { y: 70, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.mform', start: 'top 88%', once: true } });
-        gsap.from('#mwrap .field, #mwrap .submit, #mwrap .fine, #mwrap .m-online', { y: 26, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.mform', start: 'top 80%', once: true } });
-        gsap.from('.pts li', { x: -30, opacity: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.pts', start: 'top 88%', once: true } });
-                gsap.from('.faq details', { y: 30, opacity: 0, stagger: 0.09, duration: 0.7, ease: 'power3.out', scrollTrigger: { trigger: '.faq', start: 'top 80%', once: true } });
+                /* match entrances handled by IO cascades above */
+        /* faq entrances handled by IO cascades above */
         /* match + footer */
         /* (wordmark letters rise via footer.inview CSS) */
 
