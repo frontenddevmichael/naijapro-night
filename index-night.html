@@ -136,23 +136,32 @@ section { scroll-margin-top: 70px }
 .sec-head p { color: var(--mut); max-width: 26em; line-height: 1.65 }
 .sec-no { font-size: .8rem; font-weight: 700; letter-spacing: .24em; color: var(--gold); text-transform: uppercase; display: block; margin-bottom: 16px }
 
-/* ============ TRADES INDEX ============ */
-.tr-row { display: grid; grid-template-columns: 64px 1fr auto 40px; align-items: center; gap: 18px; padding: 30px 10px; border-top: 1px solid var(--line); position: relative; overflow: hidden; transition: padding .35s var(--ease) }
-.tr-row:last-child { border-bottom: 1px solid var(--line) }
-.tr-row::before { content: ""; position: absolute; inset: 0; background: var(--gold); transform: scaleY(0); transform-origin: 50% 100%; transition: transform .4s var(--ease) }
-.tr-row:hover::before { transform: scaleY(1) }
-.tr-row > * { position: relative; z-index: 1 }
-.tr-num { font-family: var(--disp); font-size: .95rem; color: var(--mut); transition: color .3s }
-.tr-name { font-family: var(--disp); font-weight: 800; font-size: clamp(1.7rem, 4.5vw, 3.2rem); letter-spacing: -.03em; transition: color .3s, transform .35s var(--ease) }
-.tr-count { font-size: .85rem; color: var(--mut); font-weight: 600; transition: color .3s }
-.tr-count b { font-weight: 600 }
-.tr-arrow { width: 40px; height: 40px; transition: transform .35s var(--ease), color .3s }
-.tr-row:hover { padding-left: 26px }
-.tr-row:hover .tr-name, .tr-row:hover .tr-num, .tr-row:hover .tr-count, .tr-row:hover .tr-arrow { color: #0A0F0D }
-.tr-row:hover .tr-arrow { transform: translate(6px, -6px) rotate(0deg) }
-@media(max-width:640px) {
-    .tr-row { grid-template-columns: 1fr auto; }
-    .tr-num, .tr-arrow { display: none }
+/* ============ TRADES BENTO ============ */
+.tr-bento { display: grid; gap: 14px; grid-template-columns: 1fr }
+.tcell { position: relative; overflow: hidden; background: var(--bg2); border: 1px solid var(--line); padding: clamp(22px, 3vw, 34px); min-height: 210px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; transition: border-color .3s, transform .35s var(--ease) }
+.tcell:hover { border-color: var(--gold); transform: translateY(-5px) }
+.tcell .t-num { position: absolute; top: 14px; left: 20px; font-family: var(--disp); font-size: .85rem; letter-spacing: .2em; color: var(--mut) }
+.tcell .t-ghost { position: absolute; top: -8px; right: 6px; font-family: var(--disp); font-weight: 800; font-size: 6.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(237, 234, 224, .18); pointer-events: none }
+.tcell h3 { font-family: var(--disp); font-weight: 800; font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -.02em; position: relative }
+.tcell p { color: var(--mut); font-size: .9rem; position: relative }
+.tcell .t-count { color: var(--gold); font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; position: relative }
+.tcell .t-go { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; transition: background .3s, border-color .3s }
+.tcell .t-go svg { width: 15px; height: 15px }
+.tcell:hover .t-go { background: var(--gold); border-color: var(--gold); color: #0A0F0D }
+.tcell.photo { padding: 0; justify-content: flex-end; border: 1px solid var(--line) }
+.tcell.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) contrast(1.05) brightness(.8); transition: transform .6s var(--ease), filter .4s }
+.tcell.photo:hover img { transform: scale(1.05); filter: saturate(1) contrast(1.05) brightness(.9) }
+.tcell.photo .t-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,15,13,.88), transparent 60%) }
+.tcell.photo h3, .tcell.photo p, .tcell.photo .t-count { position: relative; color: #fff }
+.tcell.photo p { color: rgba(255, 255, 255, .75) }
+.tcell.photo .t-count { color: var(--gold) }
+.tcell.photo .t-body { position: relative; padding: clamp(22px, 3vw, 34px); display: flex; flex-direction: column; gap: 8px }
+@media(min-width:760px) {
+    .tr-bento { grid-template-columns: repeat(6, 1fr) }
+    .tcell.t-a { grid-column: span 4; grid-row: span 2; min-height: 440px }
+    .tcell.t-a h3 { font-size: clamp(2rem, 4vw, 3.2rem) }
+    .tcell.t-b, .tcell.t-c { grid-column: span 2 }
+    .tcell.t-d, .tcell.t-e, .tcell.t-f { grid-column: span 2 }
 }
 
 /* ============ ARTISANS RAIL ============ */
@@ -391,13 +400,13 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
             <div><span class="sec-no">01 — Trades</span><h2 data-split>Every trade, one address.</h2></div>
             <p data-reveal>Twenty-four verified trades across Lagos and Abuja. Pick yours — a vetted artisan answers in minutes.</p>
         </div>
-        <div id="tr-list">
-            <a class="tr-row" href="#artisans"><span class="tr-num">/01</span><span class="tr-name">AC &amp; repair</span><span class="tr-count"><b class="count" data-to="118" data-dec="0">118</b> artisans</span><svg class="tr-arrow" viewBox="0 0 40 40" fill="none"><path d="M10 30L30 10M12 10h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="tr-row" href="#artisans"><span class="tr-num">/02</span><span class="tr-name">Solar &amp; inverter</span><span class="tr-count"><b class="count" data-to="94" data-dec="0">94</b> artisans</span><svg class="tr-arrow" viewBox="0 0 40 40" fill="none"><path d="M10 30L30 10M12 10h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="tr-row" href="#artisans"><span class="tr-num">/03</span><span class="tr-name">Plumbing</span><span class="tr-count"><b class="count" data-to="146" data-dec="0">146</b> artisans</span><svg class="tr-arrow" viewBox="0 0 40 40" fill="none"><path d="M10 30L30 10M12 10h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="tr-row" href="#artisans"><span class="tr-num">/04</span><span class="tr-name">Electrical</span><span class="tr-count"><b class="count" data-to="204" data-dec="0">204</b> artisans</span><svg class="tr-arrow" viewBox="0 0 40 40" fill="none"><path d="M10 30L30 10M12 10h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="tr-row" href="#artisans"><span class="tr-num">/05</span><span class="tr-name">Carpentry</span><span class="tr-count"><b class="count" data-to="132" data-dec="0">132</b> artisans</span><svg class="tr-arrow" viewBox="0 0 40 40" fill="none"><path d="M10 30L30 10M12 10h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            <a class="tr-row" href="#artisans"><span class="tr-num">/06</span><span class="tr-name">Tiling &amp; POP</span><span class="tr-count"><b class="count" data-to="79" data-dec="0">79</b> artisans</span><svg class="tr-arrow" viewBox="0 0 40 40" fill="none"><path d="M10 30L30 10M12 10h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="tr-bento" id="tr-list">
+            <a class="tcell photo t-a" href="#artisans"><img src="ph-electricians.jpg" alt="Electricians at work in Nigeria" loading="lazy"><span class="t-shade" aria-hidden="true"></span><span class="t-num">/01</span><span class="t-go" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="t-body"><span class="t-count"><b class="count" data-to="204" data-dec="0">204</b> artisans</span><h3>Electrical</h3><p>Wiring, panels, faults, full rewires.</p></span></a>
+            <a class="tcell t-b" href="#artisans"><span class="t-num">/02</span><span class="t-ghost" aria-hidden="true">AC</span><span class="t-go" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="t-count"><b class="count" data-to="118" data-dec="0">118</b> artisans</span><h3>AC &amp; repair</h3><p>Split units, gas, servicing.</p></a>
+            <a class="tcell t-c" href="#artisans"><span class="t-num">/03</span><span class="t-ghost" aria-hidden="true">Sol</span><span class="t-go" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="t-count"><b class="count" data-to="94" data-dec="0">94</b> artisans</span><h3>Solar &amp; inverter</h3><p>Installs, batteries.</p></a>
+            <a class="tcell t-d" href="#artisans"><span class="t-num">/04</span><span class="t-ghost" aria-hidden="true">Pl</span><span class="t-go" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="t-count"><b class="count" data-to="146" data-dec="0">146</b> artisans</span><h3>Plumbing</h3><p>Pumps, boreholes, baths.</p></a>
+            <a class="tcell photo t-e" href="#artisans"><img src="ph-saw.jpg" alt="Carpenter cutting timber" loading="lazy"><span class="t-shade" aria-hidden="true"></span><span class="t-num">/05</span><span class="t-go" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="t-body"><span class="t-count"><b class="count" data-to="132" data-dec="0">132</b> artisans</span><h3>Carpentry</h3><p>Cabinets, doors, roofs.</p></span></a>
+            <a class="tcell t-f" href="#artisans"><span class="t-num">/06</span><span class="t-ghost" aria-hidden="true">Ti</span><span class="t-go" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="t-count"><b class="count" data-to="79" data-dec="0">79</b> artisans</span><h3>Tiling &amp; POP</h3><p>Floors, walls, ceilings.</p></a>
         </div>
     </div>
 </section>
@@ -709,7 +718,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
         gsap.from('.stat', { y: 44, opacity: 0, stagger: 0.12, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.stats', start: 'top 88%', once: true } });
 
         /* trades rows */
-        gsap.from('.tr-row', { y: 44, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '#tr-list', start: 'top 85%', once: true } });
+        gsap.from('.tcell', { y: 50, opacity: 0, stagger: 0.09, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '#tr-list', start: 'top 85%', once: true } });
 
         /* join perks cascade */
         /* artisans horizontal */
