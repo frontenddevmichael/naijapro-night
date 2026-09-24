@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="hero-lagos.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="hero-lagos.jpg" fetchpriority="high">
 <style>
 :root {
     --bg: #0A0F0D;
@@ -138,10 +138,10 @@ section { scroll-margin-top: 70px }
 
 /* ============ TRADES BENTO ============ */
 .tr-bento { display: grid; gap: 14px; grid-template-columns: 1fr }
-.tcell { position: relative; overflow: hidden; background: var(--bg2); border: 1px solid var(--line); padding: clamp(20px, 2.6vw, 28px); min-height: 170px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; transition: border-color .3s, transform .35s var(--ease) }
+.tcell { position: relative; overflow: hidden; background: var(--bg2); border: 1px solid var(--line); padding: clamp(20px, 2.6vw, 28px); min-height: 170px; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; transition: border-color .3s, transform .35s var(--ease) }
 .tcell:hover { border-color: var(--gold); transform: translateY(-5px) }
 .tcell .t-num { position: absolute; top: 14px; left: 20px; font-family: var(--disp); font-size: .85rem; letter-spacing: .2em; color: var(--mut) }
-.tcell .t-ghost { position: absolute; top: -8px; right: 6px; font-family: var(--disp); font-weight: 800; font-size: 6.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(237, 234, 224, .18); pointer-events: none }
+.tcell .t-ghost { position: absolute; left: 14px; bottom: -18px; top: auto; right: auto; font-family: var(--disp); font-weight: 800; font-size: 5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(237, 234, 224, .16); pointer-events: none }
 .tcell h3 { font-family: var(--disp); font-weight: 800; font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -.02em; position: relative }
 .tcell p { color: var(--mut); font-size: .9rem; position: relative }
 .tcell .t-count { color: var(--gold); font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; position: relative }
@@ -163,6 +163,10 @@ section { scroll-margin-top: 70px }
 .tcell.solid:hover { border-color: #0A0F0D }
 .tcell.solid:hover .t-go { background: #0A0F0D; border-color: #0A0F0D; color: var(--gold) }
 @media(min-width:760px) {
+    .tr-bento { grid-template-columns: repeat(2, 1fr) }
+    .tcell.t-a { grid-column: span 2; min-height: 300px }
+}
+@media(min-width:1100px) {
     .tr-bento { grid-template-columns: repeat(6, 1fr) }
     .tcell.t-a { grid-column: span 4; grid-row: span 2; min-height: 340px }
     .tcell.t-a h3 { font-size: clamp(2rem, 4vw, 3.2rem) }
@@ -261,6 +265,27 @@ section { scroll-margin-top: 70px }
 .perk h3 { font-family: var(--disp); font-size: 1.35rem; font-weight: 800; letter-spacing: -.015em; margin-bottom: 6px }
 .perk p { margin-top: 0; font-size: .95rem }
 
+/* ============ COVERAGE MAP ============ */
+.map-board { border: 1px solid var(--line); background: var(--bg2) }
+.map-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 16px 22px; border-bottom: 1px solid var(--line); font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em }
+.map-online { display: inline-flex; align-items: center; gap: 8px; color: var(--mut) }
+.map-online i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); animation: blink 1.8s infinite }
+.map-online b { color: var(--bone) }
+.map-tabs { display: flex; gap: 8px; margin-left: auto }
+.map-tab { border: 1px solid var(--line); background: transparent; color: var(--mut); font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; padding: 8px 18px; border-radius: 999px; cursor: pointer; transition: all .25s }
+.map-tab.is-on { background: var(--gold); border-color: var(--gold); color: #0A0F0D }
+#map-el { display: block; position: relative; z-index: 0; width: 100%; height: 440px; background: #0A0F0D }
+@media(max-width:640px) { #map-el { height: 330px } }
+.leaflet-container { font-family: var(--body) }
+.m-pin { width: 34px; height: 34px; background: var(--gold); border: 2px solid #0A0F0D; color: #0A0F0D; font: 800 13px var(--disp); display: grid; place-items: center; border-radius: 50% }
+.m-pin.dim { background: var(--bg2); color: var(--bone); border-color: var(--gold) }
+.map-pop .leaflet-popup-content-wrapper { border-radius: 10px; background: #0E1512; color: var(--bone); border: 1px solid var(--gold) }
+.map-pop .leaflet-popup-content { margin: 14px 18px; font-weight: 600; line-height: 1.5 }
+.map-pop .leaflet-popup-tip { background: #0E1512; border: 1px solid var(--gold) }
+.map-legend { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 16px 22px; border-top: 1px solid var(--line); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--mut) }
+.map-legend b { display: inline-flex; align-items: center; gap: 8px; font-weight: 700 }
+.map-legend i { width: 11px; height: 11px; border-radius: 50%; flex: none }
+
 /* ============ MATCH ============ */
 .match-grid { display: grid; gap: 60px }
 @media(min-width:960px) { .match-grid { grid-template-columns: 1fr 1fr; gap: 80px; align-items: start } }
@@ -357,6 +382,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
             <a href="#trades">Trades</a>
             <a href="#artisans">Artisans</a>
             <a href="#escrow">Escrow</a>
+            <a href="#coverage">Map</a>
         </nav>
         <a class="btn-pill" href="#match" data-magnet>Post a job</a>
         <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
@@ -471,7 +497,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
 <section class="sec" id="faq">
     <div class="wrap">
         <div class="sec-head">
-            <div><span class="sec-no">07 — Questions</span><h2 data-split>Asked often.</h2></div>
+            <div><span class="sec-no">08 — Questions</span><h2 data-split>Asked often.</h2></div>
         </div>
         <div class="faq">
             <details open><summary>How does escrow protect me?<i>+</i></summary><p>Your quoted price sits with a licensed custodian — not the artisan. It releases only when you tap approve. Unhappy? The dispute desk freezes it while things get put right.</p></details>
@@ -500,11 +526,31 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
     </div>
 </section>
 
+<!-- ================= COVERAGE ================= -->
+<section class="sec" id="coverage">
+    <div class="wrap">
+        <div class="sec-head">
+            <div>            <span class="sec-no">06 — Coverage</span><h2 data-split>Live on the ground.</h2></div>
+            <p data-reveal>Real streets, real artisans online now. Pick a city and watch the map move.</p>
+        </div>
+        <div class="map-board" data-reveal>
+            <div class="map-bar"><span class="map-online"><i></i><b class="count" data-to="312" data-dec="0">312</b>&nbsp;artisans online</span>
+                <div class="map-tabs" role="tablist" aria-label="City">
+                    <button class="map-tab is-on" type="button" data-city="lagos" role="tab" aria-selected="true">Lagos</button>
+                    <button class="map-tab" type="button" data-city="abuja" role="tab" aria-selected="false">Abuja</button>
+                </div>
+            </div>
+            <div id="map-el" role="application" aria-label="Live map of artisan coverage in Lagos and Abuja"></div>
+            <div class="map-legend"><b><i style="background:var(--gold)"></i>hot zone</b><b><i style="background:var(--green)"></i>covered</b></div>
+        </div>
+    </div>
+</section>
+
 <!-- ================= MATCH ================= -->
 <section class="sec match" id="match">
     <div class="wrap match-grid">
         <div>
-            <span class="sec-no">06 — Match</span>
+            <span class="sec-no">07 — Match</span>
             <h2 id="match-h"><span class="line"><span>Quotes in</span></span><span class="line"><span>15 minutes.</span></span></h2>
             <ul class="pts">
                 <li><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>BVN-checked artisans only.</b> Identity and address verified before anyone reaches you.</span></li>
@@ -567,7 +613,8 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function () {
     'use strict';
@@ -807,6 +854,47 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
 
         /* artisans horizontal */
         gsap.from('.acard', { y: 70, opacity: 0, stagger: 0.1, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '#rail', start: 'top 85%', once: true } });
+
+                /* live coverage map */
+                var cityMap = null, lagosLayer = null, abujaLayer = null;
+                function pinIcon(n, dim) { return L.divIcon({ className: '', html: '<div class="m-pin' + (dim ? ' dim' : '') + '">' + n + '</div>', iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -18] }); }
+                function addPins(layer, list) { list.forEach(function (p) { L.marker(p.ll, { icon: pinIcon(p.n, p.dim) }).bindPopup('<b>' + p.t + '</b><br>' + p.n + ' artisans · from ₦' + p.f, { className: 'map-pop' }).addTo(layer); }); }
+                if (window.L && $('#map-el')) {
+                    cityMap = L.map('map-el', { scrollWheelZoom: false, dragging: !('ontouchstart' in window), tap: true }).setView([6.52, 3.42], 12);
+                    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: '© Esri · Maxar · Earthstar Geographics' }).addTo(cityMap);
+                    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(cityMap);
+                    lagosLayer = L.layerGroup().addTo(cityMap); abujaLayer = L.layerGroup();
+                    addPins(lagosLayer, [
+                        { ll: [6.455, 3.394], n: 64, t: 'Lekki', f: '12,500' },
+                        { ll: [6.453, 3.423], n: 51, t: 'Ikoyi', f: '15,000' },
+                        { ll: [6.428, 3.421], n: 38, t: 'Victoria Island', f: '15,000', dim: 1 },
+                        { ll: [6.601, 3.351], n: 42, t: 'Ikeja', f: '10,000' },
+                        { ll: [6.509, 3.379], n: 35, t: 'Yaba', f: '8,500' },
+                        { ll: [6.492, 3.359], n: 28, t: 'Surulere', f: '9,000', dim: 1 },
+                        { ll: [6.469, 3.585], n: 31, t: 'Ajah', f: '11,000', dim: 1 },
+                        { ll: [6.572, 3.371], n: 22, t: 'Maryland', f: '9,500', dim: 1 }
+                    ]);
+                    addPins(abujaLayer, [
+                        { ll: [9.083, 7.490], n: 26, t: 'Maitama', f: '14,000' },
+                        { ll: [9.058, 7.485], n: 33, t: 'Wuse', f: '12,000' },
+                        { ll: [9.050, 7.530], n: 19, t: 'Asokoro', f: '15,000' },
+                        { ll: [9.064, 7.424], n: 21, t: 'Jabi', f: '11,500', dim: 1 },
+                        { ll: [9.107, 7.411], n: 24, t: 'Gwarinpa', f: '10,500', dim: 1 },
+                        { ll: [9.026, 7.486], n: 17, t: 'Garki', f: '11,000', dim: 1 },
+                        { ll: [8.991, 7.378], n: 12, t: 'Lugbe', f: '9,000', dim: 1 }
+                    ]);
+                }
+                $$('.map-tab').forEach(function (b) {
+                    b.addEventListener('click', function () {
+                        $$('.map-tab').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
+                        b.classList.add('is-on'); b.setAttribute('aria-selected', 'true');
+                        var city = b.getAttribute('data-city');
+                        if (!cityMap) return;
+                        if (city === 'lagos') { cityMap.removeLayer(abujaLayer); lagosLayer.addTo(cityMap); cityMap.flyTo([6.52, 3.42], 12, { duration: 1.2 }); }
+                        else { cityMap.removeLayer(lagosLayer); abujaLayer.addTo(cityMap); cityMap.flyTo([9.06, 7.47], 12, { duration: 1.2 }); }
+                    });
+                });
+                gsap.from('.map-board', { y: 70, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.map-board', start: 'top 88%', once: true } });
 
         /* escrow timeline */
         gsap.from('.esc-step', { x: 20, opacity: 0, stagger: 0.06, duration: 0.4, ease: 'power2.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: '#escSteps', start: 'top 78%', once: true } });
