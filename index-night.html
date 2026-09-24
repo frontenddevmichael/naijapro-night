@@ -218,7 +218,7 @@ section { scroll-margin-top: 70px }
 .esc-step small { display: inline-block; margin-top: 12px; color: var(--gold); font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase }
 
 /* ============ DRIFT WALL ============ */
-.drift { position: relative; width: min(92%, 1200px); margin-inline: auto; height: clamp(480px, 66vw, 640px); overflow: hidden; perspective: 1200px; perspective-origin: 50% 45%; -webkit-mask-image: radial-gradient(ellipse 80% 86% at 50% 46%, #000 45%, transparent 100%); mask-image: radial-gradient(ellipse 80% 86% at 50% 46%, #000 45%, transparent 100%) }
+.drift { position: relative; width: min(97%, 1440px); margin-inline: auto; height: clamp(480px, 66vw, 640px); overflow: hidden; perspective: 1200px; perspective-origin: 50% 45%; -webkit-mask-image: radial-gradient(ellipse 80% 86% at 50% 46%, #000 45%, transparent 100%); mask-image: radial-gradient(ellipse 80% 86% at 50% 46%, #000 45%, transparent 100%) }
 .drift-plane { position: absolute; top: 50%; left: 50%; display: flex; gap: 18px; transform-style: preserve-3d; will-change: transform }
 .drift-col { width: 250px; flex: none; transform-style: preserve-3d }
 .drift-track { display: flex; flex-direction: column; gap: 18px; will-change: transform; transform-style: preserve-3d }
@@ -645,10 +645,10 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
             colEl.appendChild(track); plane.appendChild(colEl);
             tracks.push(track); heights.push(copyH); vels.push(0); offs.push(copyH * ((c * 0.37) % 1));
         }
-        function paint(px, py) {
-            plane.style.transform = 'translate(-50%,-50%) scale(1.18) rotateX(' + (14 + py) + 'deg) rotateY(' + (-12 + px) + 'deg)';
+        function paint() {
+            plane.style.transform = 'translate(-50%,-50%) scale(1.05)';
         }
-        paint(0, 0);
+        paint();
         if (reduceMotion) return;
         var hoverCol = -1, running = true, px = 0, py = 0, dpx = 0, dpy = 0, last = null;
         var base = tracks.map(function (_, c) { return 42 * (1 + 0.45 * pseudo(c)) * (c % 2 === 0 ? 1 : -1); });
