@@ -149,8 +149,8 @@ section { scroll-margin-top: 70px }
 .tcell .t-go svg { width: 15px; height: 15px }
 .tcell:hover .t-go { background: var(--gold); border-color: var(--gold); color: #0A0F0D }
 .tcell.photo { padding: 0; justify-content: flex-end; border: 1px solid var(--line) }
-.tcell.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) contrast(1.05) brightness(.8); transition: transform .6s var(--ease), filter .4s }
-.tcell.photo:hover img { transform: scale(1.05); filter: saturate(1) contrast(1.05) brightness(.9) }
+.tcell.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(3px) brightness(.62) saturate(.9); transition: transform .6s var(--ease), filter .45s ease }
+.tcell.photo:hover img { transform: scale(1.05); filter: blur(0) brightness(.9) saturate(1) }
 .tcell.photo .t-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,15,13,.88), transparent 60%) }
 .tcell.photo h3, .tcell.photo p, .tcell.photo .t-count { position: relative; color: #fff }
 .tcell.photo p { color: rgba(255, 255, 255, .75) }
