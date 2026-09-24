@@ -889,6 +889,10 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
                 function addPins(layer, list) { list.forEach(function (p) { L.marker(p.ll, { icon: pinIcon(p.n, p.dim) }).bindPopup('<b>' + p.t + '</b><br>' + p.n + ' artisans · from ₦' + p.f, { className: 'map-pop' }).addTo(layer); }); }
                 if (window.L && $('#map-el')) {
                     cityMap = L.map('map-el', { scrollWheelZoom: false, dragging: !('ontouchstart' in window), tap: true }).setView([6.52, 3.42], 12);
+                    var fixSize = function () { try { cityMap.invalidateSize(); } catch (e) { } };
+                    setTimeout(fixSize, 400);
+                    window.addEventListener('load', fixSize);
+                    if ('IntersectionObserver' in window) { new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { fixSize(); o.disconnect(); } }, { threshold: 0.2 }).observe($('#map-el')); }
                     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: '© Esri · Maxar · Earthstar Geographics' }).addTo(cityMap);
                     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(cityMap);
                     lagosLayer = L.layerGroup().addTo(cityMap); abujaLayer = L.layerGroup();
