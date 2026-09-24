@@ -138,7 +138,7 @@ section { scroll-margin-top: 70px }
 
 /* ============ TRADES BENTO ============ */
 .tr-bento { display: grid; gap: 14px; grid-template-columns: 1fr }
-.tcell { position: relative; overflow: hidden; background: var(--bg2); border: 1px solid var(--line); padding: clamp(22px, 3vw, 34px); min-height: 210px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; transition: border-color .3s, transform .35s var(--ease) }
+.tcell { position: relative; overflow: hidden; background: var(--bg2); border: 1px solid var(--line); padding: clamp(20px, 2.6vw, 28px); min-height: 170px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; transition: border-color .3s, transform .35s var(--ease) }
 .tcell:hover { border-color: var(--gold); transform: translateY(-5px) }
 .tcell .t-num { position: absolute; top: 14px; left: 20px; font-family: var(--disp); font-size: .85rem; letter-spacing: .2em; color: var(--mut) }
 .tcell .t-ghost { position: absolute; top: -8px; right: 6px; font-family: var(--disp); font-weight: 800; font-size: 6.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(237, 234, 224, .18); pointer-events: none }
@@ -164,7 +164,7 @@ section { scroll-margin-top: 70px }
 .tcell.solid:hover .t-go { background: #0A0F0D; border-color: #0A0F0D; color: var(--gold) }
 @media(min-width:760px) {
     .tr-bento { grid-template-columns: repeat(6, 1fr) }
-    .tcell.t-a { grid-column: span 4; grid-row: span 2; min-height: 440px }
+    .tcell.t-a { grid-column: span 4; grid-row: span 2; min-height: 340px }
     .tcell.t-a h3 { font-size: clamp(2rem, 4vw, 3.2rem) }
     .tcell.t-b, .tcell.t-c { grid-column: span 2 }
     .tcell.t-d, .tcell.t-e, .tcell.t-f { grid-column: span 2 }
@@ -488,7 +488,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
     <div class="wrap join-grid">
         <div>
             <span class="sec-no" style="color:#0A0F0D">05 — For artisans</span>
-            <h2 data-split>Your craft, fully booked.</h2>
+            <h2 data-split>Get booked.</h2>
             <p data-reveal>No more chasing payments or begging for referrals. Jobs find you, money waits in escrow, ratings bring the next one.</p>
             <div data-reveal style="margin-top:30px"><a class="btn btn-ink" href="#match" data-magnet>Become an artisan</a></div>
         </div>
