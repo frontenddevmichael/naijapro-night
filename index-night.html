@@ -11,6 +11,8 @@
     <link rel="preload" as="image" href="hero-lagos.jpg" fetchpriority="high">
 <style>
 :root {
+    --ink: #0A0F0D;
+    --deep: #0E1512;
     --bg: #0A0F0D;
     --bg2: #0E1512;
     --bone: #EDEAE0;
@@ -265,38 +267,22 @@ section { scroll-margin-top: 70px }
 .perk h3 { font-family: var(--disp); font-size: 1.35rem; font-weight: 800; letter-spacing: -.015em; margin-bottom: 6px }
 .perk p { margin-top: 0; font-size: .95rem }
 
-/* ============ COVERAGE MAP ============ */
-.mp-panel { position: relative; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #0A0F0D }
-.mp-map { display: block; position: relative; z-index: 0; width: 100%; height: min(68vh, 560px); background: #0A0F0D }
-@media(max-width:640px) { .mp-map { height: 420px } }
-.mp-map.is-loading::after { content: "Locating artisans…"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--mut); font-size: .9rem; letter-spacing: .06em; background: #0A0F0D; z-index: 600; animation: blink 1.6s infinite }
-.mp-hud { position: absolute; top: 14px; left: 14px; right: 14px; z-index: 500; display: flex; align-items: center; gap: 12px; flex-wrap: wrap }
-.mp-live { display: inline-flex; align-items: center; gap: 9px; padding: 11px 18px; border-radius: 999px; background: rgba(10, 15, 13, .78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em }
-.mp-live i { width: 9px; height: 9px; border-radius: 50%; background: var(--green); animation: blink 1.8s infinite }
-.mp-live b { color: var(--bone) }
-.mp-tabs { display: flex; gap: 8px; margin-left: auto; padding: 5px; border-radius: 999px; background: rgba(10, 15, 13, .78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line) }
-.mp-tab { border: 0; background: transparent; color: var(--mut); font-weight: 800; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; padding: 9px 20px; border-radius: 999px; cursor: pointer; transition: all .25s }
-.mp-tab.is-on { background: var(--gold); color: #0A0F0D }
-.mp-legend { position: absolute; bottom: 14px; left: 14px; z-index: 500; display: flex; gap: 8px 20px; padding: 10px 18px; border-radius: 999px; background: rgba(10, 15, 13, .78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--mut) }
-.mp-legend b { display: inline-flex; align-items: center; gap: 8px; font-weight: 800 }
-.mp-legend i { width: 11px; height: 11px; border-radius: 50%; flex: none }
-.mp-fallback { position: absolute; inset: 0; z-index: 590; display: grid; place-items: center; text-align: center; padding: 30px; color: var(--mut); font-size: .95rem; line-height: 1.6; background: #0A0F0D }
-.leaflet-container { font-family: var(--body); background: #0A0F0D }
-.leaflet-container img, .mp-panel .leaflet-tile { max-width: none !important }
-.mp-panel .leaflet-map-pane, .mp-panel .leaflet-tile-pane { width: 100%; height: 100% }
-.mp-panel .leaflet-control-zoom { border: 1px solid var(--line) !important; border-radius: 12px !important; overflow: hidden }
-.mp-panel .leaflet-control-zoom a { background: rgba(10, 15, 13, .85) !important; color: var(--bone) !important; border: 0 !important; width: 34px !important; height: 34px !important; line-height: 34px !important }
-.mp-pin { position: relative; width: 36px; height: 36px; background: var(--gold); border: 3px solid #0A0F0D; border-radius: 50%; color: #0A0F0D; font: 800 12px var(--disp); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0, 0, 0, .5) }
-.mp-pin::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid var(--gold); opacity: .5; animation: pinpulse 2.2s ease-out infinite }
-@keyframes pinpulse { from { transform: scale(.6); opacity: .7 } to { transform: scale(1.15); opacity: 0 } }
-.mp-pin.dim { background: transparent; border-color: var(--green); color: #fff }
-.mp-pin.dim::after { border-color: var(--green) }
-.mp-pop .leaflet-popup-content-wrapper { border-radius: 12px; background: #0E1512; color: var(--bone); border: 1px solid var(--gold) }
-.mp-pop .leaflet-popup-content { margin: 14px 18px; font-weight: 600; line-height: 1.5 }
-.mp-pop .leaflet-popup-content b { color: var(--gold) }
-.mp-pop .leaflet-popup-tip { background: #0E1512; border: 1px solid var(--gold); box-shadow: none }
 
-/* ============ MATCH ============ *//* ============ MATCH ============ */
+
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: 1
+            }
+
+            75%,
+            100% {
+                transform: scale(2.2);
+                opacity: 0
+            }
+        }
+
+        /* ============ MATCH ============ *//* ============ MATCH ============ *//* ============ MATCH ============ */
 .match-grid { display: grid; gap: 60px }
 @media(min-width:960px) { .match-grid { grid-template-columns: 1fr 1fr; gap: 80px; align-items: start } }
 .match h2 { font-family: var(--disp); font-weight: 800; font-size: clamp(2.4rem, 5.5vw, 4.4rem); letter-spacing: -.035em; line-height: 1.02 }
@@ -335,8 +321,8 @@ section { scroll-margin-top: 70px }
 .mdone p { color: var(--mut); line-height: 1.65; margin-bottom: 26px }
 
 /* ============ IO CASCADES (dead-zone proof) ============ */
-html.js .mp-panel, html.js .mform, html.js .proof { opacity: 0; transform: translateY(60px); transition: opacity .9s ease, transform 1s var(--ease) }
-html.js .inview.mp-panel, html.js .inview.mform, html.js .inview.proof { opacity: 1; transform: none }
+html.js .map-board, html.js .mform, html.js .proof { opacity: 0; transform: translateY(60px); transition: opacity .9s ease, transform 1s var(--ease) }
+html.js .inview.map-board, html.js .inview.mform, html.js .inview.proof { opacity: 1; transform: none }
 html.js .pts li { opacity: 0; transform: translateX(-26px); transition: opacity .7s ease, transform .8s var(--ease) }
 html.js .pts.inview li { opacity: 1; transform: none }
 html.js .pts.inview li:nth-child(2) { transition-delay: .12s }
@@ -570,20 +556,21 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
             <div>            <span class="sec-no">06 — Coverage</span><h2 data-split>Live on the ground.</h2></div>
             <p data-reveal>Real streets, real artisans online now. Pick a city and watch the map move.</p>
         </div>
-                <div class="mp-panel">
-            <div id="mp-map" class="mp-map is-loading" role="application" aria-label="Live map of artisan coverage in Lagos and Abuja"></div>
-            <div class="mp-hud"><span class="mp-live"><i></i><b class="count" data-to="312" data-dec="0">312</b>&nbsp;artisans online</span>
-                <div class="mp-tabs" role="tablist" aria-label="City">
-                    <button class="mp-tab is-on" type="button" data-city="lagos" role="tab" aria-selected="true">Lagos</button>
-                    <button class="mp-tab" type="button" data-city="abuja" role="tab" aria-selected="false">Abuja</button>
+                                <div class="map-board">
+                    <div class="map-bar"><span>Live coverage</span>
+                        <span class="map-online"><i></i><b class="count" data-to="312" data-dec="0">312</b>&nbsp;artisans online</span>
+                        <div class="map-tabs" role="tablist" aria-label="City">
+                            <button class="map-tab is-on" type="button" data-city="lagos" role="tab" aria-selected="true">Lagos</button>
+                            <button class="map-tab" type="button" data-city="abuja" role="tab" aria-selected="false">Abuja</button>
+                        </div>
+                    </div>
+                    <div class="map-stage">
+                        <div id="map-el" role="application" aria-label="Live map of artisan coverage in Lagos and Abuja"></div>
+                    </div>
+<div class="map-legend"><b><i style="background:var(--gold)"></i>hot zone</b><b><i style="background:var(--green)"></i>covered</b><b><i style="background:#fff"></i>you</b></div>
                 </div>
-            </div>
-            <div class="mp-legend"><b><i style="background:var(--gold)"></i>hot zone</b><b><i style="background:var(--green)"></i>covered</b></div>
-        </div>
-    </div>
-</section>
 
-<!-- ================= MATCH ================= -->
+        <!-- ================= MATCH ================= -->
 <section class="sec match" id="match">
     <div class="wrap match-grid">
         <div>
@@ -689,7 +676,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
     /* join + footer cascades: vanilla observer, runs with or without GSAP */
     (function () {
         var targets = [];
-        ['#perks', '.f-cta-row', '.f-cols2', '#f-word', '.mp-panel', '.mform', '.pts', '.proof', '.faq', '#rail', '#tr-list'].forEach(function (s) { var el = $(s); if (el) targets.push(el); });
+        ['#perks', '.f-cta-row', '.f-cols2', '#f-word', '.map-board', '.mform', '.pts', '.proof', '.faq', '#rail', '#tr-list'].forEach(function (s) { var el = $(s); if (el) targets.push(el); });
         if (!targets.length) return;
         if (!('IntersectionObserver' in window)) { targets.forEach(function (el) { el.classList.add('inview'); }); return; }
         var io = new IntersectionObserver(function (es) {
@@ -892,31 +879,16 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
         /* artisans horizontal */
                 /* card entrances handled by IO cascades above */
 
-                /* live coverage map: fresh build */
-                (function () {
-                    var el = $('#mp-map'); if (!el) return;
-                    function done() { el.classList.remove('is-loading'); }
-                    function fail(msg) {
-                        done();
-                        var fb = document.createElement('div'); fb.className = 'mp-fallback';
-                        fb.textContent = msg || 'Live map is offline right now — 312 artisans are online across Lagos and Abuja.';
-                        el.appendChild(fb);
-                    }
-                    if (!window.L) { fail(); return; }
-                    var map, lagos, abuja, tilesOK = 0, tilesBad = 0;
-                    try {
-                        map = L.map('mp-map', { scrollWheelZoom: false, dragging: !('ontouchstart' in window), tap: true, zoomControl: true, updateWhenIdle: false, keepBuffer: 4, zoomSnap: 0.5 }).setView([6.52, 3.42], 12);
-                    } catch (e) { fail(); return; }
-                    map.attributionControl.setPrefix(false);
-                    function pin(n, dim) { return L.divIcon({ className: '', html: '<div class="mp-pin' + (dim ? ' dim' : '') + '">' + n + '</div>', iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -20] }); }
-                    function drop(layer, list) { list.forEach(function (o) { L.marker(o.ll, { icon: pin(o.n, o.dim) }).bindPopup('<b>' + o.t + '</b><br>' + o.n + ' artisans · from ₦' + o.f, { className: 'mp-pop' }).addTo(layer); }); }
-                    var tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Imagery © Esri, Maxar, Earthstar Geographics' });
-                    tiles.on('tileerror', function () { if (++tilesBad > 8 && tilesOK < 4) { fail('Map tiles are not loading on your connection — 312 artisans are online across Lagos and Abuja.'); } });
-                    tiles.on('load', function () { done(); try { map.invalidateSize(); } catch (e) { } });
-                    tiles.addTo(map);
-                    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(map);
-                    lagos = L.layerGroup().addTo(map); abuja = L.layerGroup();
-                    drop(lagos, [
+                /* live map */
+                var cityMap = null, lagosLayer = null, abujaLayer = null;
+                function pinIcon(n, dim) { return L.divIcon({ className: '', html: '<div class="m-pin' + (dim ? ' dim' : '') + '">' + n + '</div>', iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -18] }); }
+                function addPins(layer, list) { list.forEach(function (p) { L.marker(p.ll, { icon: pinIcon(p.n, p.dim) }).bindPopup('<b>' + p.t + '</b><br>' + p.n + ' artisans · from ₦' + p.f, { className: 'map-pop' }).addTo(layer); }); }
+                if (window.L && $('#map-el')) {
+                    cityMap = L.map('map-el', { scrollWheelZoom: false, dragging: !('ontouchstart' in window), tap: true }).setView([6.52, 3.42], 12);
+                    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: '© Esri · Maxar · Earthstar Geographics' }).addTo(cityMap);
+                    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16 }).addTo(cityMap);
+                    lagosLayer = L.layerGroup().addTo(cityMap); abujaLayer = L.layerGroup();
+                    addPins(lagosLayer, [
                         { ll: [6.455, 3.394], n: 64, t: 'Lekki', f: '12,500' },
                         { ll: [6.453, 3.423], n: 51, t: 'Ikoyi', f: '15,000' },
                         { ll: [6.428, 3.421], n: 38, t: 'Victoria Island', f: '15,000', dim: 1 },
@@ -926,7 +898,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
                         { ll: [6.469, 3.585], n: 31, t: 'Ajah', f: '11,000', dim: 1 },
                         { ll: [6.572, 3.371], n: 22, t: 'Maryland', f: '9,500', dim: 1 }
                     ]);
-                    drop(abuja, [
+                    addPins(abujaLayer, [
                         { ll: [9.083, 7.490], n: 26, t: 'Maitama', f: '14,000' },
                         { ll: [9.058, 7.485], n: 33, t: 'Wuse', f: '12,000' },
                         { ll: [9.050, 7.530], n: 19, t: 'Asokoro', f: '15,000' },
@@ -935,24 +907,21 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
                         { ll: [9.026, 7.486], n: 17, t: 'Garki', f: '11,000', dim: 1 },
                         { ll: [8.991, 7.378], n: 12, t: 'Lugbe', f: '9,000', dim: 1 }
                     ]);
-                    var boot = function () { try { map.invalidateSize(); map.setView([6.52, 3.42], 12, { animate: false }); } catch (e) { } };
-                    setTimeout(boot, 500);
-                    window.addEventListener('load', boot);
-                    if ('IntersectionObserver' in window) { new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { boot(); o.disconnect(); } }, { threshold: 0.2 }).observe(el); }
-                    $$('.mp-tab').forEach(function (b) {
-                        b.addEventListener('click', function () {
-                            $$('.mp-tab').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
-                            b.classList.add('is-on'); b.setAttribute('aria-selected', 'true');
-                            if (!map) return;
-                            var city = b.getAttribute('data-city');
-                            if (city === 'lagos') { try { map.removeLayer(abuja); } catch (e) { } lagos.addTo(map); map.flyTo([6.52, 3.42], 12, { duration: 1.2 }); }
-                            else { try { map.removeLayer(lagos); } catch (e) { } abuja.addTo(map); map.flyTo([9.06, 7.47], 12, { duration: 1.2 }); }
-                        });
+                }
+                $$('.map-tab').forEach(function (b) {
+                    b.addEventListener('click', function () {
+                        $$('.map-tab').forEach(function (x) { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
+                        b.classList.add('is-on'); b.setAttribute('aria-selected', 'true');
+                        var city = b.getAttribute('data-city');
+                        if (!cityMap) return;
+                        if (city === 'lagos') { cityMap.removeLayer(abujaLayer); lagosLayer.addTo(cityMap); cityMap.flyTo([6.52, 3.42], 12, { duration: 1.2 }); }
+                        else { cityMap.removeLayer(lagosLayer); abujaLayer.addTo(cityMap); cityMap.flyTo([9.06, 7.47], 12, { duration: 1.2 }); }
                     });
-                })();
+                });
 
+                
 
-        /* escrow timeline */
+                /* escrow timeline *//* escrow timeline */
         gsap.from('.esc-step', { x: 20, opacity: 0, stagger: 0.06, duration: 0.4, ease: 'power2.out', clearProps: 'opacity,transform', scrollTrigger: { trigger: '#escSteps', start: 'top 78%', once: true } });
         (function () {
             var steps = $$('.esc-step');
