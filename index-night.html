@@ -903,7 +903,7 @@ footer .btn-gold { font-size: 1.05rem; padding: 19px 52px }
                     if (!window.L) { fail(); return; }
                     var map, lagos, abuja, tilesOK = 0, tilesBad = 0;
                     try {
-                        map = L.map('mp-map', { scrollWheelZoom: false, dragging: !('ontouchstart' in window), tap: true, zoomControl: true }).setView([6.52, 3.42], 12);
+                        map = L.map('mp-map', { scrollWheelZoom: false, dragging: !('ontouchstart' in window), tap: true, zoomControl: true, updateWhenIdle: false, keepBuffer: 4, zoomSnap: 0.5 }).setView([6.52, 3.42], 12);
                     } catch (e) { fail(); return; }
                     map.attributionControl.setPrefix(false);
                     function pin(n, dim) { return L.divIcon({ className: '', html: '<div class="mp-pin' + (dim ? ' dim' : '') + '">' + n + '</div>', iconSize: [36, 36], iconAnchor: [18, 18], popupAnchor: [0, -20] }); }
