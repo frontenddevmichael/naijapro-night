@@ -283,27 +283,25 @@ section { scroll-margin-top: 70px }
             }
         }
 
-                .map-board {
+.map-board {
             position: relative;
-            border: 5px solid var(--ink);
-            box-shadow: 12px 12px 0 var(--ink);
-            background: var(--ink);
-            transform: rotate(.4deg)
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #0A0F0D
         }
 
-        .map-bar {
+.map-bar {
             display: flex;
             align-items: center;
             gap: 14px;
             flex-wrap: wrap;
-            background: var(--gold);
-            color: var(--ink);
-            border-bottom: 5px solid var(--ink);
-            padding: 12px 20px;
-            font-weight: 900;
+            padding: 16px 22px;
+            border-bottom: 1px solid var(--line);
+            font-size: .8rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: .08em;
-            font-size: .82rem
+            letter-spacing: .1em
         }
 
         .map-tabs {
@@ -312,21 +310,24 @@ section { scroll-margin-top: 70px }
             margin-left: auto
         }
 
-        .map-tab {
-            border: 3px solid var(--ink);
+.map-tab {
+            border: 1px solid var(--line);
             background: transparent;
-            color: var(--ink);
-            font-weight: 900;
-            font-size: .78rem;
+            color: var(--mut);
+            font-weight: 800;
+            font-size: .76rem;
             text-transform: uppercase;
-            letter-spacing: .06em;
-            padding: 6px 16px;
-            transition: background .08s, color .08s
+            letter-spacing: .08em;
+            padding: 8px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all .25s
         }
 
-        .map-tab.is-on {
-            background: var(--ink);
-            color: var(--gold)
+.map-tab.is-on {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #0A0F0D
         }
 
         .map-online {
@@ -366,27 +367,28 @@ section { scroll-margin-top: 70px }
             font-family: var(--body)
         }
 
-        .m-pin {
+.m-pin {
             width: 34px;
             height: 34px;
             background: var(--gold);
-            border: 3px solid #03150E;
-            color: #03150E;
-            font: 800 13px var(--disp);
+            border-radius: 50%;
+            color: #0A0F0D;
+            font: 800 12px var(--disp);
             display: grid;
-            place-items: center;
-            box-shadow: 3px 3px 0 rgba(0, 0, 0, .5)
+            place-items: center
         }
 
-        .m-pin.dim {
-            background: var(--green);
+.m-pin.dim {
+            background: transparent;
+            border: 2px solid var(--green);
             color: #fff
         }
 
-        .map-pop .leaflet-popup-content-wrapper {
-            border-radius: 0;
-            border: 3px solid var(--ink);
-            box-shadow: 5px 5px 0 rgba(0, 0, 0, .4)
+.map-pop .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            background: #0E1512;
+            color: var(--bone);
+            border: 1px solid var(--gold)
         }
 
         .map-pop .leaflet-popup-content {
@@ -395,8 +397,9 @@ section { scroll-margin-top: 70px }
             line-height: 1.45
         }
 
-        .map-pop .leaflet-popup-tip {
-            border: 3px solid var(--ink);
+.map-pop .leaflet-popup-tip {
+            background: #0E1512;
+            border: 1px solid var(--gold);
             box-shadow: none
         }
 
@@ -411,8 +414,7 @@ section { scroll-margin-top: 70px }
             flex-wrap: wrap;
             gap: 10px 26px;
             padding: 14px 20px;
-            border-top: 5px solid var(--ink);
-            background: var(--ink);
+            border-top: 1px solid var(--line);
             color: rgba(255, 255, 255, .75);
             font-size: .8rem;
             font-weight: 700;
