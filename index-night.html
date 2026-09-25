@@ -282,6 +282,8 @@ section { scroll-margin-top: 70px }
 .mp-legend i { width: 11px; height: 11px; border-radius: 50%; flex: none }
 .mp-fallback { position: absolute; inset: 0; z-index: 590; display: grid; place-items: center; text-align: center; padding: 30px; color: var(--mut); font-size: .95rem; line-height: 1.6; background: #0A0F0D }
 .leaflet-container { font-family: var(--body); background: #0A0F0D }
+.leaflet-container img, .mp-panel .leaflet-tile { max-width: none !important }
+.mp-panel .leaflet-map-pane, .mp-panel .leaflet-tile-pane { width: 100%; height: 100% }
 .mp-panel .leaflet-control-zoom { border: 1px solid var(--line) !important; border-radius: 12px !important; overflow: hidden }
 .mp-panel .leaflet-control-zoom a { background: rgba(10, 15, 13, .85) !important; color: var(--bone) !important; border: 0 !important; width: 34px !important; height: 34px !important; line-height: 34px !important }
 .mp-pin { position: relative; width: 36px; height: 36px; background: var(--gold); border: 3px solid #0A0F0D; border-radius: 50%; color: #0A0F0D; font: 800 12px var(--disp); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(0, 0, 0, .5) }
